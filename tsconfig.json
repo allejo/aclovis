@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "pretty": false,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": false,
+    "stripInternal": true,
+    "target": "ES6",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "./tests/**/*.spec.ts"
+  ],
+  "compileOnSave": false
+}
