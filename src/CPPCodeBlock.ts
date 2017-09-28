@@ -9,7 +9,7 @@ export class CPPCodeBlock implements ILanguageCodeBlock {
     }
 
     write(formatter: CPPFormatter, indentCount: number = 0): string {
-        let indent = formatter.indentation.repeat(indentCount);
+        const indent = formatter.indentation.repeat(indentCount);
         let output = indent + this.signature;
         output += (formatter.options.bracesOnNewLine ? "\n" + indent : " ") + "{\n";
 
