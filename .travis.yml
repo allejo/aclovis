@@ -6,3 +6,8 @@ node_js:
 cache:
   directories:
     - "node_modules"
+
+notifications:
+  email: false
+  webhooks:
+    - http://helit.org:8093/+sujevo-dev/showSuccessfulBuildMessages=always/hideURL=true
