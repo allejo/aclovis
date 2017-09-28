@@ -1,5 +1,4 @@
 /// <reference path="ILanguageVariable.ts" />
-/// <reference path="ILanguageFormatter.ts" />
 
 import { CPPFormatter } from './CPPFormatter';
 
