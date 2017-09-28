@@ -45,7 +45,11 @@ export class CPPVariable implements ILanguageVariable {
         return output;
     }
 
-    static createString(name: string, value: string) : CPPVariable {
+    static createString(name: string, value: string = null) : CPPVariable {
+        if (value === null) {
+            return (new CPPVariable('std::string', name));
+        }
+
         return (new CPPVariable('std::string', name, `"${value}"`));
     }
 }
