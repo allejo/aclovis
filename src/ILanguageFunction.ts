@@ -1,6 +1,6 @@
 interface ILanguageFunction extends IWritable {
-    getParentClass(): ILanguageClass;
-    setParentClass(parentClass: ILanguageClass): void;
+    getParentClass(): ILanguageClass|null;
+    setParentClass(parentClass: ILanguageClass, visibility?: any): void;
 
     getSignature(): string;
 }

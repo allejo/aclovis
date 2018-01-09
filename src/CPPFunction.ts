@@ -4,6 +4,7 @@ import { CPPClass } from './CPPClass';
 import { CPPVariable } from './CPPVariable';
 import { CPPCodeBlock } from './CPPCodeBlock';
 import { CPPFormatter } from './CPPFormatter';
+import { CPPVisibility } from './CPPVisibility';
 
 export class CPPFunction implements ILanguageFunction {
     private parentClass: CPPClass = null;
@@ -34,7 +35,8 @@ export class CPPFunction implements ILanguageFunction {
         return this.parentClass;
     }
 
-    setParentClass(parentClass: CPPClass): void {
+    setParentClass(parentClass: CPPClass, visibility: CPPVisibility): void {
+        parentClass.addMethod(this, visibility);
         this.parentClass = parentClass;
     }
 

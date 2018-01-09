@@ -1,7 +1,8 @@
 import { CPPClass } from "../src/CPPClass";
 import { CPPFunction } from "../src/CPPFunction";
 import { CPPFormatter } from "../src/CPPFormatter";
-import { CPPVariable } from "../src//CPPVariable";
+import { CPPVariable } from "../src/CPPVariable";
+import { CPPVisibility } from "../src/CPPVisibility";
 import { expect } from 'chai';
 import 'mocha';
 
@@ -60,7 +61,7 @@ std::string welcomeGuest(std::string guest, std::string suffix)
         it('should have class prefix on write', () => {
             let cls = new CPPClass("BaseClass");
             let fxn = new CPPFunction('void', 'burnToast');
-            fxn.setParentClass(cls);
+            fxn.setParentClass(cls, CPPVisibility.Public);
 
             let format = new CPPFormatter({
                 indentSpaceCount: 2,

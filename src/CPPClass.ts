@@ -1,10 +1,13 @@
 /// <reference path="ILanguageClass.ts" />
 
 import { CPPFormatter } from './CPPFormatter';
+import { CPPFunction } from './CPPFunction';
+import { CPPVisibility }from './CPPVisibility';
 
 export class CPPClass implements ILanguageClass {
     private classIncludes: string[] = [];
     private classExtends: [string, string][] = [];
+    private methods: [CPPVisibility, CPPFunction][] = [];
 
     /**
      * @param name The name of the class
@@ -19,6 +22,10 @@ export class CPPClass implements ILanguageClass {
 
     getClassName(): string {
         return this.name;
+    }
+
+    addMethod(fxn: CPPFunction, visibility: CPPVisibility) {
+        this.methods.push([visibility, fxn]);
     }
 
     //
