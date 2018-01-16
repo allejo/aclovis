@@ -4,10 +4,20 @@ import { CPPFormatter } from './CPPFormatter';
 import { CPPFunction } from './CPPFunction';
 import { CPPVisibility }from './CPPVisibility';
 
+interface FunctionDefinition {
+    virtual: boolean;
+    visibility: CPPVisibility;
+    functionDef: CPPFunction;
+}
+
+interface FunctionStorage {
+    [name: string]: FunctionDefinition;
+}
+
 export class CPPClass implements ILanguageClass {
     private classIncludes: string[] = [];
-    private classExtends: [string, string][] = [];
-    private methods: [CPPVisibility, CPPFunction][] = [];
+    private classExtends: [string, CPPClass|string][] = [];
+    private methods: FunctionStorage = {};
 
     /**
      * @param name The name of the class
@@ -24,8 +34,16 @@ export class CPPClass implements ILanguageClass {
         return this.name;
     }
 
-    addMethod(fxn: CPPFunction, visibility: CPPVisibility) {
-        this.methods.push([visibility, fxn]);
+    getMethods(): FunctionStorage {
+        return this.methods;
+    }
+
+    setMethod(fxn: CPPFunction, visibility: CPPVisibility, virtual: boolean = false) {
+        this.methods[fxn.getSignature()] = {
+            virtual: virtual,
+            visibility: visibility,
+            functionDef: fxn,
+        };
     }
 
     //
@@ -55,7 +73,7 @@ export class CPPClass implements ILanguageClass {
     //
     // Class extends
     //
-    getExtends(): [string, string][] {
+    getExtends(): [string, CPPClass|string][] {
         return this.classExtends;
     }
 
@@ -64,7 +82,7 @@ export class CPPClass implements ILanguageClass {
      *
      * @param classExtends A tuple of the visibility and name of the class this class is extending
      */
-    addExtends(classExtends: [string, string]) {
+    addExtends(classExtends: [CPPVisibility, CPPClass|string]) {
         this.classExtends.push(classExtends);
     }
 

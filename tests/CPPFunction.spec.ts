@@ -76,5 +76,48 @@ void BaseClass::burnToast()
 }
             `.trim());
         });
+
+        it('should have a body with variables', () => {
+            let fxn = new CPPFunction('void', 'myFunction');
+            let myVar = new CPPVariable('int', 'life', 42);
+
+            fxn.implementFunction([myVar]);
+
+            let format = new CPPFormatter({
+                indentSpaceCount: 2,
+                indentWithSpaces: true,
+                bracesOnNewLine: true
+            });
+            let output = fxn.write(format);
+
+            expect(output).to.equal(`
+void myFunction()
+{
+  int life = 42;
+}
+            `.trim());
+        });
+
+        it('should support the function body being appended to', () => {
+            let fxn = new CPPFunction('void', 'myAppendFunction');
+
+            fxn.appendFunction(new CPPVariable('int', 'life', 42));
+            fxn.appendFunction(new CPPVariable('bool', 'isToast', true));
+
+            let format = new CPPFormatter({
+                indentSpaceCount: 2,
+                indentWithSpaces: true,
+                bracesOnNewLine: true
+            });
+            let output = fxn.write(format);
+
+            expect(output).to.equal(`
+void myAppendFunction()
+{
+  int life = 42;
+  bool isToast = true;
+}
+            `.trim());
+        });
     });
 });

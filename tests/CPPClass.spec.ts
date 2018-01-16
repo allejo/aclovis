@@ -1,4 +1,5 @@
 import { CPPClass } from "../src/CPPClass";
+import { CPPVisibility } from "../src/CPPVisibility";
 import { expect } from 'chai';
 import 'mocha';
 
@@ -9,7 +10,7 @@ describe('C++ Classes', () => {
                 'Class With Space': 'ClassWithSpace',
                 'Hello!W@rld': 'HelloWrld',
                 '12345': 'GenericClass'
-            }
+            };
 
             for (let raw in names) {
                 let sanitized = names[raw];
@@ -73,7 +74,7 @@ describe('C++ Classes', () => {
         it('should extend a public class', () => {
             let cppclass = new CPPClass('ObliviousToast');
 
-            cppclass.addExtends(['public', 'AbstractClass']);
+            cppclass.addExtends([CPPVisibility.Public, 'AbstractClass']);
 
             expect(cppclass.classSignature())
                 .to.equal('class ObliviousToast : public AbstractClass')

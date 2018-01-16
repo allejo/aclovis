@@ -8,6 +8,7 @@ import { CPPVisibility } from './CPPVisibility';
 
 export class CPPFunction implements ILanguageFunction {
     private parentClass: CPPClass = null;
+    private body: IWritable[] = [];
 
     constructor(readonly returnType: string, readonly functionName: string, public parameters: CPPVariable[] = []) {
 
@@ -26,9 +27,21 @@ export class CPPFunction implements ILanguageFunction {
             args.push(param.slice(0, -1));
         });
 
-        output += `${this.functionName}(${args.join(', ')})`
+        output += `${this.functionName}(${args.join(', ')})`;
 
         return output;
+    }
+
+    implementFunction(body: IWritable[]): void {
+        this.body = body;
+    }
+
+    appendFunction(body: IWritable|IWritable[]): void {
+        if (body instanceof Array) {
+            this.body = this.body.concat(body);
+        } else {
+            this.body.push(body);
+        }
     }
 
     getParentClass(): CPPClass {
@@ -36,12 +49,12 @@ export class CPPFunction implements ILanguageFunction {
     }
 
     setParentClass(parentClass: CPPClass, visibility: CPPVisibility): void {
-        parentClass.addMethod(this, visibility);
+        parentClass.setMethod(this, visibility);
         this.parentClass = parentClass;
     }
 
     write(formatter: CPPFormatter, indentCount: number = 0): string {
-        let block = new CPPCodeBlock(this.getSignature());
+        let block = new CPPCodeBlock(this.getSignature(), this.body);
 
         return block.write(formatter, indentCount);
     }
