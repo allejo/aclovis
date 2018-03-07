@@ -15,13 +15,13 @@ describe('C++ Variables', () => {
 
             expect(cppvar.write(fmtr)).to.equal('bool turnedOn;');
         });
-        
+
         it('should be indented one level', () => {
             const cppvar = new CPPVariable('bool', 'turnedOn', false);
 
             expect(cppvar.write(fmtr, 1)).to.equal('  bool turnedOn;');
         });
-        
+
         it('should be indented two levels', () => {
             const cppvar = new CPPVariable('bool', 'turnedOn', false);
 

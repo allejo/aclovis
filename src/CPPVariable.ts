@@ -1,6 +1,5 @@
-/// <reference path="ILanguageVariable.ts" />
-
 import { CPPFormatter } from './CPPFormatter';
+import { ILanguageVariable } from './ILanguageVariable';
 
 export class CPPVariable implements ILanguageVariable {
     constructor(private dataType: string, private variableName: string, private variableValue?: any) {}
@@ -36,7 +35,7 @@ export class CPPVariable implements ILanguageVariable {
             output += ` = ${this.variableValue}`;
         }
 
-        output += ';'
+        output += ';';
 
         if (indentCount > 0) {
             output = formatter.indentation.repeat(indentCount) + output;
@@ -45,11 +44,11 @@ export class CPPVariable implements ILanguageVariable {
         return output;
     }
 
-    static createString(name: string, value: string = null) : CPPVariable {
+    static createString(name: string, value: string = null): CPPVariable {
         if (value === null) {
-            return (new CPPVariable('std::string', name));
+            return new CPPVariable('std::string', name);
         }
 
-        return (new CPPVariable('std::string', name, `"${value}"`));
+        return new CPPVariable('std::string', name, `"${value}"`);
     }
 }

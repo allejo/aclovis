@@ -3,5 +3,5 @@ interface ILanguageClass extends IWritable {
 }
 
 declare var ILanguageClass: {
-    new(name: string): ILanguageClass;
-}
+    new (name: string): ILanguageClass;
+};

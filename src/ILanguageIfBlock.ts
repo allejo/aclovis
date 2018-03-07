@@ -5,4 +5,4 @@ interface ILanguageIfBlock extends IWritable {
 
 declare var ILanguageIfBlock: {
     new (): ILanguageIfBlock;
-}
+};

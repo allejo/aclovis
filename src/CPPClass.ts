@@ -2,7 +2,7 @@
 
 import { CPPFormatter } from './CPPFormatter';
 import { CPPFunction } from './CPPFunction';
-import { CPPVisibility }from './CPPVisibility';
+import { CPPVisibility } from './CPPVisibility';
 
 interface FunctionDefinition {
     virtual: boolean;

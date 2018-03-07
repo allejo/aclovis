@@ -14,79 +14,70 @@ describe('C++ If Statement', () => {
     it('should only have an if statement', () => {
         let ifStatement = new CPPIfBlock();
 
-        ifStatement.defineCondition('1 == 1', [
-            CPPVariable.createString('variable')
-        ]);
+        ifStatement.defineCondition('1 == 1', [CPPVariable.createString('variable')]);
 
         let output = ifStatement.write(format);
 
-        expect(output).to.equal(`
+        expect(output).to.equal(
+            `
 if (1 == 1) {
     std::string variable;
 }
-        `.trim());
+        `.trim()
+        );
     });
 
     it('should have an if and an else if', () => {
         let ifStatement = new CPPIfBlock();
 
-        ifStatement.defineCondition('var == 1', [
-            CPPVariable.createString('variable')
-        ]);
-        ifStatement.defineCondition('var == 2', [
-            CPPVariable.createString('toast')
-        ]);
+        ifStatement.defineCondition('var == 1', [CPPVariable.createString('variable')]);
+        ifStatement.defineCondition('var == 2', [CPPVariable.createString('toast')]);
 
         let output = ifStatement.write(format);
 
-        expect(output).to.equal(`
+        expect(output).to.equal(
+            `
 if (var == 1) {
     std::string variable;
 }
 else if (var == 2) {
     std::string toast;
 }
-        `.trim());
+        `.trim()
+        );
     });
 
     it('should have an if and an else', () => {
         let ifStatement = new CPPIfBlock();
 
-        ifStatement.defineCondition('var == 1', [
-            CPPVariable.createString('variable')
-        ]);
-        ifStatement.defineElseCondition([
-            CPPVariable.createString('toast')
-        ]);
+        ifStatement.defineCondition('var == 1', [CPPVariable.createString('variable')]);
+        ifStatement.defineElseCondition([CPPVariable.createString('toast')]);
 
         let output = ifStatement.write(format);
 
-        expect(output).to.equal(`
+        expect(output).to.equal(
+            `
 if (var == 1) {
     std::string variable;
 }
 else {
     std::string toast;
 }
-        `.trim());
+        `.trim()
+        );
     });
 
     it('should have an if, else if, and an else', () => {
         let ifStatement = new CPPIfBlock();
 
-        ifStatement.defineCondition('var == 1', [
-            CPPVariable.createString('variable')
-        ]);
-        ifStatement.defineCondition('var == 2', [
-            CPPVariable.createString('bread')
-        ]);
-        ifStatement.defineElseCondition([
-            CPPVariable.createString('toast')
-        ]);
+        ifStatement.defineCondition('var == 1', [CPPVariable.createString('variable')]);
+        ifStatement.defineCondition('var == 2', [CPPVariable.createString('bread')]);
+        ifStatement.defineElseCondition([CPPVariable.createString('toast')]);
 
         let output = ifStatement.write(format);
 
-        expect(output).to.equal(`
+        expect(output).to.equal(
+            `
 if (var == 1) {
     std::string variable;
 }
@@ -96,6 +87,7 @@ else if (var == 2) {
 else {
     std::string toast;
 }
-        `.trim());
+        `.trim()
+        );
     });
 });

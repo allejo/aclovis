@@ -31,25 +31,18 @@ describe('C++ Classes', () => {
         it('should be able to have new entries', () => {
             let cppclass = new CPPClass('');
 
-            cppclass
-                .addInclude('cstdio')
-                .addInclude('cmath')
-            ;
+            cppclass.addInclude('cstdio').addInclude('cmath');
 
             expect(cppclass.getIncludes())
                 .to.be.an('array')
                 .that.contains('cstdio')
-                .that.contains('cmath')
-            ;
+                .that.contains('cmath');
         });
 
         it('should be able to have entry removed', () => {
             let cppclass = new CPPClass('');
 
-            cppclass
-                .addInclude('cstdio')
-                .addInclude('cmath')
-            ;
+            cppclass.addInclude('cstdio').addInclude('cmath');
 
             expect(cppclass.getIncludes()).has.lengthOf(2);
 
@@ -57,18 +50,15 @@ describe('C++ Classes', () => {
 
             expect(cppclass.getIncludes())
                 .to.have.lengthOf(1)
-                .to.contain('cmath')
-            ;
-        })
+                .to.contain('cmath');
+        });
     });
 
     describe('class signature', () => {
         it('should not extend anything', () => {
             let cppclass = new CPPClass('ObliviousToast');
 
-            expect(cppclass.classSignature())
-                .to.equal('class ObliviousToast')
-            ;
+            expect(cppclass.classSignature()).to.equal('class ObliviousToast');
         });
 
         it('should extend a public class', () => {
@@ -76,9 +66,7 @@ describe('C++ Classes', () => {
 
             cppclass.addExtends([CPPVisibility.Public, 'AbstractClass']);
 
-            expect(cppclass.classSignature())
-                .to.equal('class ObliviousToast : public AbstractClass')
-            ;
+            expect(cppclass.classSignature()).to.equal('class ObliviousToast : public AbstractClass');
         });
     });
 });

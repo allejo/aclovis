@@ -1,7 +1,5 @@
-interface ILanguageCodeBlock extends IWritable {
-
-}
+interface ILanguageCodeBlock extends IWritable {}
 
 declare var ILanguageCodeBlock: {
-    new(signature: string, body: IWritable[]): ILanguageCodeBlock;
-}
+    new (signature: string, body: IWritable[]): ILanguageCodeBlock;
+};

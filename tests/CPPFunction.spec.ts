@@ -1,8 +1,8 @@
-import { CPPClass } from "../src/CPPClass";
-import { CPPFunction } from "../src/CPPFunction";
-import { CPPFormatter } from "../src/CPPFormatter";
-import { CPPVariable } from "../src/CPPVariable";
-import { CPPVisibility } from "../src/CPPVisibility";
+import { CPPClass } from '../src/CPPClass';
+import { CPPFunction } from '../src/CPPFunction';
+import { CPPFormatter } from '../src/CPPFormatter';
+import { CPPVariable } from '../src/CPPVariable';
+import { CPPVisibility } from '../src/CPPVisibility';
 import { expect } from 'chai';
 import 'mocha';
 
@@ -17,10 +17,12 @@ describe('C++ Functions', () => {
             });
             let output = fxn.write(format);
 
-            expect(output).to.equal(`
+            expect(output).to.equal(
+                `
 std::string printHello() {
 }
-            `.trim());
+            `.trim()
+            );
         });
 
         it('should have parameters with one default', () => {
@@ -34,10 +36,12 @@ std::string printHello() {
             });
             let output = fxn.write(format);
 
-            expect(output).to.equal(`
+            expect(output).to.equal(
+                `
 std::string welcomeGuest(std::string guest, std::string suffix = "!") {
 }
-            `.trim());
+            `.trim()
+            );
         });
 
         it('should have parameters with no defaults', () => {
@@ -51,15 +55,17 @@ std::string welcomeGuest(std::string guest, std::string suffix = "!") {
             });
             let output = fxn.write(format);
 
-            expect(output).to.equal(`
+            expect(output).to.equal(
+                `
 std::string welcomeGuest(std::string guest, std::string suffix)
 {
 }
-            `.trim());
+            `.trim()
+            );
         });
 
         it('should have class prefix on write', () => {
-            let cls = new CPPClass("BaseClass");
+            let cls = new CPPClass('BaseClass');
             let fxn = new CPPFunction('void', 'burnToast');
             fxn.setParentClass(cls, CPPVisibility.Public);
 
@@ -70,11 +76,13 @@ std::string welcomeGuest(std::string guest, std::string suffix)
             });
             let output = fxn.write(format);
 
-            expect(output).to.equal(`
+            expect(output).to.equal(
+                `
 void BaseClass::burnToast()
 {
 }
-            `.trim());
+            `.trim()
+            );
         });
 
         it('should have a body with variables', () => {

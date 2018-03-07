@@ -1,6 +1,6 @@
 /// <reference path="ILanguageIfBlock.ts" />
 
-import { CPPCodeBlock } from "./CPPCodeBlock";
+import { CPPCodeBlock } from './CPPCodeBlock';
 
 export class CPPIfBlock implements ILanguageIfBlock {
     conditions: { [condition: string]: IWritable[] } = {};
@@ -46,7 +46,7 @@ export class CPPIfBlock implements ILanguageIfBlock {
         let output: string = '';
 
         ifBlocks.forEach(element => {
-            output += element.write(formatter, indentCount) + "\n" + formatter.indentation.repeat(indentCount);
+            output += element.write(formatter, indentCount) + '\n' + formatter.indentation.repeat(indentCount);
         });
 
         return output.trim();

@@ -1,6 +1,6 @@
-import { CPPCodeBlock } from "../src/CPPCodeBlock";
-import { CPPFormatter } from "../src/CPPFormatter";
-import { CPPVariable } from "../src/CPPVariable";
+import { CPPCodeBlock } from '../src/CPPCodeBlock';
+import { CPPFormatter } from '../src/CPPFormatter';
+import { CPPVariable } from '../src/CPPVariable';
 import { expect } from 'chai';
 import 'mocha';
 
@@ -15,11 +15,13 @@ describe('C++ Code Blocks', () => {
             });
             let output = block.write(format);
 
-            expect(output).to.equal(`
+            expect(output).to.equal(
+                `
 int main()
 {
 }
-            `.trim());
+            `.trim()
+            );
         });
 
         it('should have braces on same line', () => {
@@ -31,10 +33,12 @@ int main()
             });
             let output = block.write(format);
 
-            expect(output).to.equal(`
+            expect(output).to.equal(
+                `
 int main() {
 }
-            `.trim());
+            `.trim()
+            );
         });
     });
 
@@ -51,11 +55,13 @@ int main() {
 
             let output = block.write(format);
 
-            expect(output).to.equal(`
+            expect(output).to.equal(
+                `
 int main() {
     std::string password = "my super password";
 }
-            `.trim());
+            `.trim()
+            );
         });
 
         it('should have nested code blocks with braces on new line', () => {
@@ -72,7 +78,8 @@ int main() {
 
             let output = block.write(format);
 
-            expect(output).to.equal(`
+            expect(output).to.equal(
+                `
 class Toast
 {
     struct Cheese
@@ -80,7 +87,8 @@ class Toast
         std::string name;
     }
 }
-            `.trim());
+            `.trim()
+            );
         });
 
         it('should have nested code blocks with braces on same line', () => {
@@ -97,13 +105,15 @@ class Toast
 
             let output = block.write(format);
 
-            expect(output).to.equal(`
+            expect(output).to.equal(
+                `
 class Toast {
     struct Cheese {
         std::string name;
     }
 }
-            `.trim());
+            `.trim()
+            );
         });
     });
 });

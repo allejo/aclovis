@@ -11,6 +11,7 @@
     "prettier": "^1.11.1"
   },
   "scripts": {
+    "prettify": "prettier --write \"{src,tests}/*\"",
     "test": "mocha -r ts-node/register tests/*.spec.ts"
   }
 }

@@ -1,18 +1,15 @@
-/// <reference path="./ILanguageFunction.ts" />
-
 import { CPPClass } from './CPPClass';
 import { CPPVariable } from './CPPVariable';
 import { CPPCodeBlock } from './CPPCodeBlock';
 import { CPPFormatter } from './CPPFormatter';
 import { CPPVisibility } from './CPPVisibility';
+import { ILanguageFunction } from './ILanguageFunction';
 
 export class CPPFunction implements ILanguageFunction {
     private parentClass: CPPClass = null;
     private body: IWritable[] = [];
 
-    constructor(readonly returnType: string, readonly functionName: string, public parameters: CPPVariable[] = []) {
-
-    }
+    constructor(readonly returnType: string, readonly functionName: string, public parameters: CPPVariable[] = []) {}
 
     getSignature(): string {
         let output = this.returnType + ' ';

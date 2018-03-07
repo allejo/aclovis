@@ -1,5 +1,5 @@
 export enum CPPVisibility {
-    Public = "public",
-    Protected = "protected",
-    Private = "private",
+    Public = 'public',
+    Protected = 'protected',
+    Private = 'private'
 }
