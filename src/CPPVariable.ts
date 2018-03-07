@@ -44,11 +44,35 @@ export class CPPVariable implements ILanguageVariable {
         return output;
     }
 
+    static createBoolean(name: string, value: boolean = null): CPPVariable {
+        return this.createVariable('bool', name, value, value ? 'true' : 'false');
+    }
+
+    static createInt(name: string, value: number = null): CPPVariable {
+        return this.createVariable('int', name, value);
+    }
+
+    static createDouble(name: string, value: number = null): CPPVariable {
+        return this.createVariable('double', name, value);
+    }
+
+    static createFloat(name: string, value: number = null): CPPVariable {
+        return this.createVariable('float', name, value);
+    }
+
+    static createConstChar(name: string, value: string = null): CPPVariable {
+        return this.createVariable('const char*', name, value, `"${value}"`);
+    }
+
     static createString(name: string, value: string = null): CPPVariable {
-        if (value === null) {
-            return new CPPVariable('std::string', name);
+        return this.createVariable('std::string', name, value, `"${value}"`);
+    }
+
+    private static createVariable(type: string, name: string, rawValue: any = null, literalValue: any = null) {
+        if (rawValue === null) {
+            return new CPPVariable(type, name);
         }
 
-        return new CPPVariable('std::string', name, `"${value}"`);
+        return new CPPVariable(type, name, literalValue || rawValue);
     }
 }

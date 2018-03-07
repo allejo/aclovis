@@ -42,4 +42,40 @@ describe('C++ Variables', () => {
             expect(cppvar.write(fmtr)).to.equal('std::string my_string = "toast is awesome";');
         });
     });
+
+    describe('Static helper functions', () => {
+        describe('Boolean functions', () => {
+            it('should declare without a value', () => {
+                const cppvar = CPPVariable.createBoolean('isTrue');
+
+                expect(cppvar.write(fmtr)).to.equal('bool isTrue;');
+            });
+
+            it('should declare and initialize a false value', () => {
+                const cppvar = CPPVariable.createBoolean('isTrue', false);
+
+                expect(cppvar.write(fmtr)).to.equal('bool isTrue = false;');
+            });
+
+            it('should declare and initialize a true value', () => {
+                const cppvar = CPPVariable.createBoolean('isTrue', true);
+
+                expect(cppvar.write(fmtr)).to.equal('bool isTrue = true;');
+            });
+        });
+
+        describe('Integer functions', () => {
+            it('should declare without a value', () => {
+                const cppvar = CPPVariable.createInt('myInt');
+
+                expect(cppvar.write(fmtr)).to.equal('int myInt;');
+            });
+
+            it('should declare and initialize a false value', () => {
+                const cppvar = CPPVariable.createInt('myInt', 100);
+
+                expect(cppvar.write(fmtr)).to.equal('int myInt = 100;');
+            });
+        });
+    });
 });
