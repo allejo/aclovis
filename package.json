@@ -7,7 +7,8 @@
     "@types/chai": "^4.0.4",
     "@types/mocha": "^2.2.43",
     "chai": "^4.1.2",
-    "mocha": "^3.5.3"
+    "mocha": "^3.5.3",
+    "prettier": "^1.11.1"
   },
   "scripts": {
     "test": "mocha -r ts-node/register tests/*.spec.ts"
