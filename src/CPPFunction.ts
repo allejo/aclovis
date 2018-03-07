@@ -33,7 +33,7 @@ export class CPPFunction implements ILanguageFunction {
         this.body = body;
     }
 
-    appendFunction(body: IWritable|IWritable[]): void {
+    appendFunction(body: IWritable | IWritable[]): void {
         if (body instanceof Array) {
             this.body = this.body.concat(body);
         } else {

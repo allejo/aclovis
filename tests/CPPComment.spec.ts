@@ -1,5 +1,5 @@
-import { CPPComment } from "../src/CPPComment";
-import { CPPFormatter } from "../src/CPPFormatter";
+import { CPPComment } from '../src/CPPComment';
+import { CPPFormatter } from '../src/CPPFormatter';
 import { expect } from 'chai';
 import 'mocha';
 
@@ -13,33 +13,35 @@ describe('C++ Comments', () => {
             });
             let output = comment.write(format);
 
-            expect(output).to.equal(`
+            expect(output).to.equal(
+                `
 /*
  */
-            `.trim());
+            `.trim()
+            );
         });
 
         it('should have asterisks and content', () => {
-            let comment = new CPPComment([
-                'My first line',
-                'A second line for my comment',
-                '',
-                'A non-empty line following an empty line'
-            ], true);
+            let comment = new CPPComment(
+                ['My first line', 'A second line for my comment', '', 'A non-empty line following an empty line'],
+                true
+            );
             let format = new CPPFormatter({
                 indentSpaceCount: 2,
                 indentWithSpaces: true
             });
             let output = comment.write(format);
 
-            expect(output).to.equal(`
+            expect(output).to.equal(
+                `
 /*
  * My first line
  * A second line for my comment
  *
  * A non-empty line following an empty line
  */
-            `.trim());
+            `.trim()
+            );
         });
     });
 
@@ -52,8 +54,10 @@ describe('C++ Comments', () => {
             });
             let output = comment.write(format);
 
-            expect(output).to.equal(`
-            `.trim());
+            expect(output).to.equal(
+                `
+            `.trim()
+            );
         });
 
         it('should have an empty "//" with an empty string', () => {
@@ -64,45 +68,47 @@ describe('C++ Comments', () => {
             });
             let output = comment.write(format);
 
-            expect(output).to.equal(`
+            expect(output).to.equal(
+                `
 //
-            `.trim());
+            `.trim()
+            );
         });
     });
 
     it('should have a single line comment using "//"', () => {
-        let comment = new CPPComment([
-            'A single line comment',
-        ], false);
+        let comment = new CPPComment(['A single line comment'], false);
         let format = new CPPFormatter({
             indentSpaceCount: 2,
             indentWithSpaces: true
         });
         let output = comment.write(format);
 
-        expect(output).to.equal(`
+        expect(output).to.equal(
+            `
 // A single line comment
-        `.trim());
+        `.trim()
+        );
     });
 
     it('should multiple single line comments should each use "//"', () => {
-        let comment = new CPPComment([
-            'My first comment',
-            'A second line',
-            '',
-            'an empty comment before this line'
-        ], false);
+        let comment = new CPPComment(
+            ['My first comment', 'A second line', '', 'an empty comment before this line'],
+            false
+        );
         let format = new CPPFormatter({
             indentSpaceCount: 2,
             indentWithSpaces: true
         });
         let output = comment.write(format);
 
-        expect(output).to.equal(`
+        expect(output).to.equal(
+            `
 // My first comment
 // A second line
 //
 // an empty comment before this line
-        `.trim());
+        `.trim()
+        );
     });
 });

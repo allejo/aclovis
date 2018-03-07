@@ -1,11 +1,9 @@
 /// <reference path="./ILanguageComment.ts" />
 
-import { CPPFormatter } from "./CPPFormatter";
+import { CPPFormatter } from './CPPFormatter';
 
 export class CPPComment implements ILanguageComment {
-    constructor(private body: string[], private blockType: boolean) {
-
-    }
+    constructor(private body: string[], private blockType: boolean) {}
 
     appendBody(body: string | string[]): void {
         if (body instanceof Array) {

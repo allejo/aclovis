@@ -1,5 +1,5 @@
-import { CPPClass } from "../src/CPPClass";
-import { CPPVisibility } from "../src/CPPVisibility";
+import { CPPClass } from '../src/CPPClass';
+import { CPPVisibility } from '../src/CPPVisibility';
 import { expect } from 'chai';
 import 'mocha';
 

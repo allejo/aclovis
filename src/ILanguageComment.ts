@@ -1,7 +1,7 @@
 interface ILanguageComment extends IWritable {
-    appendBody(body: string|string[]): void;
+    appendBody(body: string | string[]): void;
 }
 
 declare var ILanguageComment: {
-    new(body: string[], blockType: boolean): ILanguageComment;
+    new (body: string[], blockType: boolean): ILanguageComment;
 };

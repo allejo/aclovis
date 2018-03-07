@@ -1,4 +1,4 @@
-interface ILanguageClass extends IWritable {
+export interface ILanguageClass extends IWritable {
     getClassName(): string;
 }
 

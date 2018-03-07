@@ -98,12 +98,14 @@ void BaseClass::burnToast()
             });
             let output = fxn.write(format);
 
-            expect(output).to.equal(`
+            expect(output).to.equal(
+                `
 void myFunction()
 {
   int life = 42;
 }
-            `.trim());
+            `.trim()
+            );
         });
 
         it('should support the function body being appended to', () => {
@@ -119,13 +121,15 @@ void myFunction()
             });
             let output = fxn.write(format);
 
-            expect(output).to.equal(`
+            expect(output).to.equal(
+                `
 void myAppendFunction()
 {
   int life = 42;
   bool isToast = true;
 }
-            `.trim());
+            `.trim()
+            );
         });
     });
 });

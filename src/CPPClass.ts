@@ -1,8 +1,7 @@
-/// <reference path="ILanguageClass.ts" />
-
 import { CPPFormatter } from './CPPFormatter';
 import { CPPFunction } from './CPPFunction';
 import { CPPVisibility } from './CPPVisibility';
+import { ILanguageClass } from './ILanguageClass';
 
 interface FunctionDefinition {
     virtual: boolean;
@@ -16,7 +15,7 @@ interface FunctionStorage {
 
 export class CPPClass implements ILanguageClass {
     private classIncludes: string[] = [];
-    private classExtends: [string, CPPClass|string][] = [];
+    private classExtends: [string, CPPClass | string][] = [];
     private methods: FunctionStorage = {};
 
     /**
@@ -25,7 +24,7 @@ export class CPPClass implements ILanguageClass {
     constructor(private name: string) {
         this.name = name.replace(/[^A-Za-z_]/g, '');
 
-        if (this.name.trim().length == 0) {
+        if (this.name.trim().length === 0) {
             this.name = 'GenericClass';
         }
     }
@@ -42,7 +41,7 @@ export class CPPClass implements ILanguageClass {
         this.methods[fxn.getSignature()] = {
             virtual: virtual,
             visibility: visibility,
-            functionDef: fxn,
+            functionDef: fxn
         };
     }
 
@@ -73,7 +72,7 @@ export class CPPClass implements ILanguageClass {
     //
     // Class extends
     //
-    getExtends(): [string, CPPClass|string][] {
+    getExtends(): [string, CPPClass | string][] {
         return this.classExtends;
     }
 
@@ -82,7 +81,7 @@ export class CPPClass implements ILanguageClass {
      *
      * @param classExtends A tuple of the visibility and name of the class this class is extending
      */
-    addExtends(classExtends: [CPPVisibility, CPPClass|string]) {
+    addExtends(classExtends: [CPPVisibility, CPPClass | string]) {
         this.classExtends.push(classExtends);
     }
 
