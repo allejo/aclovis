@@ -44,32 +44,32 @@ export default class CPPVariable implements ILanguageVariable {
         return output;
     }
 
-    static createBoolean(name: string, value: boolean = null): CPPVariable {
+    static createBoolean(name: string, value?: boolean): CPPVariable {
         return this.createVariable('bool', name, value, value ? 'true' : 'false');
     }
 
-    static createInt(name: string, value: number = null): CPPVariable {
+    static createInt(name: string, value?: number): CPPVariable {
         return this.createVariable('int', name, value);
     }
 
-    static createDouble(name: string, value: number = null): CPPVariable {
+    static createDouble(name: string, value?: number): CPPVariable {
         return this.createVariable('double', name, value);
     }
 
-    static createFloat(name: string, value: number = null): CPPVariable {
+    static createFloat(name: string, value?: number): CPPVariable {
         return this.createVariable('float', name, value);
     }
 
-    static createConstChar(name: string, value: string = null): CPPVariable {
+    static createConstChar(name: string, value?: string): CPPVariable {
         return this.createVariable('const char*', name, value, `"${value}"`);
     }
 
-    static createString(name: string, value: string = null): CPPVariable {
+    static createString(name: string, value?: string): CPPVariable {
         return this.createVariable('std::string', name, value, `"${value}"`);
     }
 
-    private static createVariable(type: string, name: string, rawValue: any = null, literalValue: any = null) {
-        if (rawValue === null) {
+    private static createVariable(type: string, name: string, rawValue?: any, literalValue?: any) {
+        if (rawValue == null) {
             return new CPPVariable(type, name);
         }
 

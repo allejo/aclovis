@@ -10,5 +10,5 @@ export default interface ILanguageFunction extends IWritable {
 };
 
 declare var ILanguageFunction: {
-    new (returnType: string, functionName: string, parameters?: ILanguageVariable[]): ILanguageFunction;
+    new (returnType: string, functionName: string, parameters: ILanguageVariable[]): ILanguageFunction;
 };
