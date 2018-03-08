@@ -2,6 +2,8 @@ import CPPFormatter from './CPPFormatter';
 import CPPFunction from './CPPFunction';
 import { CPPVisibility } from './CPPVisibility';
 import ILanguageClass from './ILanguageClass';
+import CPPCodeBlock from './CPPCodeBlock';
+import CPPWritableObject from './CPPWritableObject';
 
 interface FunctionDefinition {
     virtual: boolean;
@@ -104,9 +106,17 @@ export default class CPPClass implements ILanguageClass {
     }
 
     write(formatter: CPPFormatter, indentCount: number): string {
-        console.log(formatter, indentCount);
+        let output: string[] = [];
 
-        return '';
+        output.push(this.buildDefinitionBlock(formatter, indentCount));
+
+        for (let key in this.methods) {
+            let fxn: FunctionDefinition = this.methods[key];
+
+            output.push(fxn.functionDef.write(formatter, indentCount));
+        }
+
+        return output.join('\n\n').trim();
     }
 
     //
@@ -127,5 +137,28 @@ export default class CPPClass implements ILanguageClass {
         }
 
         return signature;
+    }
+
+    private buildDefinitionBlock(formatter: CPPFormatter, indentCount: number): string {
+        let classDefinitionBody: CPPWritableObject[] = [];
+
+        for (let key in this.methods) {
+            let output = '';
+            let fxn: FunctionDefinition = this.methods[key];
+
+            if (fxn.virtual) {
+                output += 'virtual ';
+            }
+
+            output += fxn.functionDef.getSignature();
+            output += ';';
+
+            classDefinitionBody.push(new CPPWritableObject(output));
+        }
+
+        let blk = new CPPCodeBlock(this.classSignature(), classDefinitionBody);
+        let output = blk.write(formatter, indentCount);
+
+        return output + ';';
     }
 }

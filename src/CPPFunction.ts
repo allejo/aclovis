@@ -9,6 +9,7 @@ import IWritable from './IWritable';
 export default class CPPFunction implements ILanguageFunction {
     private parentClass: CPPClass = null;
     private body: IWritable[] = [];
+    private virtual: boolean = false;
 
     constructor(readonly returnType: string, readonly functionName: string, public parameters: CPPVariable[] = []) {}
 
@@ -47,8 +48,12 @@ export default class CPPFunction implements ILanguageFunction {
     }
 
     setParentClass(parentClass: CPPClass, visibility: CPPVisibility): void {
-        parentClass.setMethod(this, visibility);
+        parentClass.setMethod(this, visibility, this.virtual);
         this.parentClass = parentClass;
+    }
+
+    setVirtual(virtual: boolean) {
+        this.virtual = virtual;
     }
 
     write(formatter: CPPFormatter, indentCount: number = 0): string {
