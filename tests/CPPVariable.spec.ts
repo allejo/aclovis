@@ -1,5 +1,5 @@
-import { CPPVariable } from '../src/CPPVariable';
-import { CPPFormatter } from '../src/CPPFormatter';
+import CPPVariable from '../src/CPPVariable';
+import CPPFormatter from '../src/CPPFormatter';
 import { expect } from 'chai';
 import 'mocha';
 

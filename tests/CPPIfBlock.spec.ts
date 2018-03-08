@@ -1,8 +1,8 @@
-import { CPPIfBlock } from '../src/CPPIfBlock';
-import { CPPFormatter } from '../src/CPPFormatter';
+import CPPIfBlock from '../src/CPPIfBlock';
+import CPPFormatter from '../src/CPPFormatter';
+import CPPVariable from '../src/CPPVariable';
 import { expect } from 'chai';
 import 'mocha';
-import { CPPVariable } from '../src/CPPVariable';
 
 describe('C++ If Statement', () => {
     let format = new CPPFormatter({

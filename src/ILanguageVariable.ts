@@ -1,4 +1,6 @@
-export interface ILanguageVariable extends IWritable {
+import IWritable from './IWritable';
+
+export default interface ILanguageVariable extends IWritable {
     getDataType(): string;
     setDataType(value: string): this;
 
@@ -7,7 +9,7 @@ export interface ILanguageVariable extends IWritable {
 
     getVariableValue(): any;
     setVariableValue(value: any): this;
-}
+};
 
 declare var ILanguageVariable: {
     new (dataType: string, variableName: string, variableValue?: any): ILanguageVariable;

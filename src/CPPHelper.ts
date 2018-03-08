@@ -1,6 +1,6 @@
 import { CPPWritableObject } from './CPPWritableObject';
 
-export class CPPHelper {
+export default class CPPHelper {
     public static createEmptyLine() {
         return new CPPWritableObject('');
     }

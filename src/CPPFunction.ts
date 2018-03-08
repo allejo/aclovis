@@ -1,11 +1,12 @@
-import { CPPClass } from './CPPClass';
-import { CPPVariable } from './CPPVariable';
-import { CPPCodeBlock } from './CPPCodeBlock';
-import { CPPFormatter } from './CPPFormatter';
+import CPPClass from './CPPClass';
+import CPPCodeBlock from './CPPCodeBlock';
+import CPPFormatter from './CPPFormatter';
+import CPPVariable from './CPPVariable';
 import { CPPVisibility } from './CPPVisibility';
-import { ILanguageFunction } from './ILanguageFunction';
+import ILanguageFunction from './ILanguageFunction';
+import IWritable from './IWritable';
 
-export class CPPFunction implements ILanguageFunction {
+export default class CPPFunction implements ILanguageFunction {
     private parentClass: CPPClass = null;
     private body: IWritable[] = [];
 

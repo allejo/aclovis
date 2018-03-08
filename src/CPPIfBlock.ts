@@ -1,8 +1,10 @@
-/// <reference path="ILanguageIfBlock.ts" />
+import CPPCodeBlock from './CPPCodeBlock';
+import ILanguageCodeBlock from './ILanguageCodeBlock';
+import ILanguageFormatter from './ILanguageFormatter';
+import ILanguageIfBlock from './ILanguageIfBlock';
+import IWritable from './IWritable';
 
-import { CPPCodeBlock } from './CPPCodeBlock';
-
-export class CPPIfBlock implements ILanguageIfBlock {
+export default class CPPIfBlock implements ILanguageIfBlock {
     conditions: { [condition: string]: IWritable[] } = {};
     elseCondition: IWritable[] = [];
 

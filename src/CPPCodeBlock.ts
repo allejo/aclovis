@@ -1,9 +1,8 @@
-/// <reference path="ILanguageCodeBlock.ts" />
-/// <reference path="IWritable.ts" />
+import CPPFormatter from './CPPFormatter';
+import ILanguageCodeBlock from './ILanguageCodeBlock';
+import IWritable from './IWritable';
 
-import { CPPFormatter } from './CPPFormatter';
-
-export class CPPCodeBlock implements ILanguageCodeBlock {
+export default class CPPCodeBlock implements ILanguageCodeBlock {
     constructor(readonly signature: string, public body: IWritable[] = []) {}
 
     write(formatter: CPPFormatter, indentCount: number = 0): string {

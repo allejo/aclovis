@@ -1,4 +1,4 @@
-interface IFormatOptions {
+export default interface IFormatOptions {
     // Indentation configuration
     indentWithSpaces: boolean;
     indentSpaceCount?: number;
@@ -6,4 +6,4 @@ interface IFormatOptions {
     // Braces configuration
     bracesExist?: boolean;
     bracesOnNewLine?: boolean;
-}
+};

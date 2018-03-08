@@ -1,3 +1,3 @@
-interface ILanguageFormatter {
+export default interface ILanguageFormatter {
     readonly indentation: string;
-}
+};

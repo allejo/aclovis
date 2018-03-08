@@ -1,7 +1,7 @@
-/// <reference path="ILanguageFormatter.ts" />
-/// <reference path="IFormatOptions.ts" />
+import IFormatOptions from './IFormatOptions';
+import ILanguageFormatter from './ILanguageFormatter';
 
-export class CPPFormatter implements ILanguageFormatter {
+export default class CPPFormatter implements ILanguageFormatter {
     readonly indentation: string;
 
     constructor(public options: IFormatOptions) {

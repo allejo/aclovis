@@ -1,7 +1,7 @@
-import { CPPFormatter } from './CPPFormatter';
-import { CPPFunction } from './CPPFunction';
+import CPPFormatter from './CPPFormatter';
+import CPPFunction from './CPPFunction';
 import { CPPVisibility } from './CPPVisibility';
-import { ILanguageClass } from './ILanguageClass';
+import ILanguageClass from './ILanguageClass';
 
 interface FunctionDefinition {
     virtual: boolean;
@@ -13,7 +13,7 @@ interface FunctionStorage {
     [name: string]: FunctionDefinition;
 }
 
-export class CPPClass implements ILanguageClass {
+export default class CPPClass implements ILanguageClass {
     private classIncludes: string[] = [];
     private classExtends: [string, CPPClass | string][] = [];
     private methods: FunctionStorage = {};
