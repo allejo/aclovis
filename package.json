@@ -1,4 +1,10 @@
 {
+  "name": "alyssa",
+  "version": "1.0.0",
+  "description": "A library to generate C++ code in TypeScript",
+  "directories": {
+    "test": "tests"
+  },
   "dependencies": {
     "ts-node": "^3.3.0",
     "typescript": "^2.5.3"
@@ -13,5 +19,15 @@
   "scripts": {
     "prettify": "prettier --write \"{src,tests}/*\"",
     "test": "mocha -r ts-node/register tests/*.spec.ts"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allejo/alyssa.git"
+  },
+  "author": "Vladimir \"allejo\" Jimenez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/allejo/alyssa/issues"
+  },
+  "homepage": "https://github.com/allejo/alyssa#readme"
 }
