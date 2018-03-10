@@ -108,7 +108,7 @@ export default class CPPClass implements ILanguageClass {
     write(formatter: CPPFormatter, indentCount: number): string {
         let output: string[] = [];
 
-        output.push(this.buildDefinitionBlock(formatter, indentCount));
+        output.push(this.writeHeaderBlock(formatter, indentCount));
 
         for (let key in this.methods) {
             let fxn: FunctionDefinition = this.methods[key];
@@ -123,7 +123,7 @@ export default class CPPClass implements ILanguageClass {
     // Build the chunks of a class definition
     //
 
-    classSignature(): string {
+    writeClassSignature(): string {
         let signature = `class ${this.name}`;
 
         if (this.classExtends.length > 0) {
@@ -139,7 +139,7 @@ export default class CPPClass implements ILanguageClass {
         return signature;
     }
 
-    private buildDefinitionBlock(formatter: CPPFormatter, indentCount: number): string {
+    writeHeaderBlock(formatter: CPPFormatter, indentCount: number): string {
         let classDefinitionBody: CPPWritableObject[] = [];
 
         for (let key in this.methods) {
@@ -150,13 +150,12 @@ export default class CPPClass implements ILanguageClass {
                 output += 'virtual ';
             }
 
-            output += fxn.functionDef.getSignature();
-            output += ';';
+            output += fxn.functionDef.getSignature(true);
 
             classDefinitionBody.push(new CPPWritableObject(output));
         }
 
-        let blk = new CPPCodeBlock(this.classSignature(), classDefinitionBody);
+        let blk = new CPPCodeBlock(this.writeClassSignature(), classDefinitionBody);
         let output = blk.write(formatter, indentCount);
 
         return output + ';';

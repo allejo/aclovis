@@ -1,3 +1,4 @@
+import CPPHelper from '../src/CPPHelper';
 import CPPVariable from '../src/CPPVariable';
 import CPPFormatter from '../src/CPPFormatter';
 import { expect } from 'chai';
@@ -71,11 +72,69 @@ describe('C++ Variables', () => {
                 expect(cppvar.write(fmtr)).to.equal('int myInt;');
             });
 
-            it('should declare and initialize a false value', () => {
+            it('should declare and initialize a integer value', () => {
                 const cppvar = CPPVariable.createInt('myInt', 100);
 
                 expect(cppvar.write(fmtr)).to.equal('int myInt = 100;');
             });
+        });
+
+        describe('Double functions', () => {
+            it('should declare without a value', () => {
+                const cppvar = CPPVariable.createDouble('bagPlease');
+
+                expect(cppvar.write(fmtr)).to.equal('double bagPlease;');
+            });
+
+            it('should declare and initialize a value of -9.8', () => {
+                const cppvar = CPPVariable.createDouble('gravity', -9.8);
+
+                expect(cppvar.write(fmtr)).to.equal('double gravity = -9.8;');
+            });
+        });
+
+        describe('Float functions', () => {
+            it('should declare without a value', () => {
+                const cppvar = CPPVariable.createFloat('gravity');
+
+                expect(cppvar.write(fmtr)).to.equal('float gravity;');
+            });
+
+            it('should declare and initialize a value of 100.125', () => {
+                const cppvar = CPPVariable.createDouble('gravity', 100.125);
+
+                expect(cppvar.write(fmtr)).to.equal('double gravity = 100.125;');
+            });
+        });
+
+        describe('const char* functions', () => {
+            it('should declare without a value', () => {
+                const cppvar = CPPVariable.createConstChar('bird');
+
+                expect(cppvar.write(fmtr)).to.equal('const char* bird;');
+            });
+
+            it('should declare and initialize a value of "toast is good"', () => {
+                const cppvar = CPPVariable.createConstChar('bird', 'toast is good');
+
+                expect(cppvar.write(fmtr)).to.equal('const char* bird = "toast is good";');
+            });
+        });
+    });
+
+    describe('Using objects in helper functions', () => {
+        it('should use the variable name with CPPVariable objects', () => {
+            const myVar = CPPVariable.createInt('answer', 42);
+            const secondVar = CPPVariable.createFloat('floatingAnswer', myVar);
+
+            expect(secondVar.write(fmtr)).to.equal('float floatingAnswer = answer;');
+        });
+
+        it('should use the variable name with CPPWritable objects', () => {
+            const fxnCall = CPPHelper.createFunctionCall('std::stoi', [42]);
+            const intVal = CPPVariable.createInt('answer', fxnCall);
+
+            expect(intVal.write(fmtr)).to.equal('int answer = std::stoi(42);');
         });
     });
 });

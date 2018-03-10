@@ -5,7 +5,7 @@ export default class CPPHelper {
         return new CPPWritableObject('');
     }
 
-    public static createFunctionCall(name: string, parameters: string[] = []) {
+    public static createFunctionCall(name: string, parameters: boolean[] | number[] | string[] = []) {
         return new CPPWritableObject(`${name}(${parameters.join(', ')});`);
     }
 }

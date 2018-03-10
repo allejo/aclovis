@@ -7,26 +7,36 @@ import ILanguageFunction from './ILanguageFunction';
 import IWritable from './IWritable';
 
 export default class CPPFunction implements ILanguageFunction {
-    private parentClass: CPPClass = null;
+    private parentClass?: CPPClass;
     private body: IWritable[] = [];
     private virtual: boolean = false;
+    private pureVirtual: boolean = false;
 
     constructor(readonly returnType: string, readonly functionName: string, public parameters: CPPVariable[] = []) {}
 
-    getSignature(): string {
+    getSignature(getAsDefinition: boolean = false): string {
         let output = this.returnType + ' ';
 
-        if (this.parentClass !== null) {
+        if (!getAsDefinition && this.parentClass != null) {
             output += `${this.parentClass.getClassName()}::`;
         }
 
         let args: string[] = [];
+        let fmtr = new CPPFormatter();
         this.parameters.forEach(function(variable) {
-            let param = variable.write(null);
+            let param = variable.write(fmtr);
             args.push(param.slice(0, -1));
         });
 
         output += `${this.functionName}(${args.join(', ')})`;
+
+        if (this.pureVirtual && getAsDefinition) {
+            output += ' = 0';
+        }
+
+        if (getAsDefinition) {
+            output += ';';
+        }
 
         return output;
     }
@@ -43,17 +53,39 @@ export default class CPPFunction implements ILanguageFunction {
         }
     }
 
-    getParentClass(): CPPClass {
-        return this.parentClass;
+    getParentClass(): CPPClass | null {
+        return this.parentClass || null;
     }
 
-    setParentClass(parentClass: CPPClass, visibility: CPPVisibility): void {
+    setParentClass(parentClass: CPPClass, visibility: CPPVisibility): this {
         parentClass.setMethod(this, visibility, this.virtual);
         this.parentClass = parentClass;
+
+        return this;
     }
 
-    setVirtual(virtual: boolean) {
+    getVirtual(): boolean {
+        return this.virtual;
+    }
+
+    setVirtual(virtual: boolean): this {
         this.virtual = virtual;
+
+        return this;
+    }
+
+    getPureVirtual(): boolean {
+        return this.pureVirtual;
+    }
+
+    setPureVirtual(pure: boolean): this {
+        this.pureVirtual = pure;
+
+        if (pure) {
+            this.virtual = true;
+        }
+
+        return this;
     }
 
     write(formatter: CPPFormatter, indentCount: number = 0): string {

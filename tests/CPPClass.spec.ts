@@ -1,4 +1,7 @@
 import CPPClass from '../src/CPPClass';
+import CPPFormatter from '../src/CPPFormatter';
+import CPPFunction from '../src/CPPFunction';
+import CPPVariable from '../src/CPPVariable';
 import { CPPVisibility } from '../src/CPPVisibility';
 import { expect } from 'chai';
 import 'mocha';
@@ -58,7 +61,7 @@ describe('C++ Classes', () => {
         it('should not extend anything', () => {
             let cppclass = new CPPClass('ObliviousToast');
 
-            expect(cppclass.classSignature()).to.equal('class ObliviousToast');
+            expect(cppclass.writeClassSignature()).to.equal('class ObliviousToast');
         });
 
         it('should extend a public class', () => {
@@ -66,7 +69,121 @@ describe('C++ Classes', () => {
 
             cppclass.addExtends([CPPVisibility.Public, 'AbstractClass']);
 
-            expect(cppclass.classSignature()).to.equal('class ObliviousToast : public AbstractClass');
+            expect(cppclass.writeClassSignature()).to.equal('class ObliviousToast : public AbstractClass');
+        });
+    });
+
+    describe('Class header block', () => {
+        it('should be empty', () => {
+            let cppclass = new CPPClass('PetThief');
+            let fmtr = new CPPFormatter({
+                indentWithSpaces: true,
+                indentSpaceCount: 4,
+                bracesOnNewLine: true
+            });
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(
+                `
+class PetThief
+{
+};
+            `.trim()
+            );
+        });
+
+        it('should have a virtual function', () => {
+            let cppclass = new CPPClass('PetThief');
+            let stealFxn = new CPPFunction('void', 'steal');
+
+            stealFxn.setVirtual(true);
+            stealFxn.setParentClass(cppclass, CPPVisibility.Public);
+
+            let fmtr = new CPPFormatter({
+                indentWithSpaces: true,
+                indentSpaceCount: 4,
+                bracesOnNewLine: true
+            });
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(
+                `
+class PetThief
+{
+    virtual void steal();
+};
+            `.trim()
+            );
+        });
+
+        it('should have a virtual function with parameters', () => {
+            let cppclass = new CPPClass('PetThief');
+            let stealFxn = new CPPFunction('void', 'steal', [
+                CPPVariable.createInt('owner'),
+                CPPVariable.createInt('target', -1)
+            ]);
+
+            stealFxn.setVirtual(true);
+            stealFxn.setParentClass(cppclass, CPPVisibility.Public);
+
+            let fmtr = new CPPFormatter({
+                indentWithSpaces: true,
+                indentSpaceCount: 4,
+                bracesOnNewLine: true
+            });
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(
+                `
+class PetThief
+{
+    virtual void steal(int owner, int target = -1);
+};
+            `.trim()
+            );
+        });
+
+        it('should have a pure virtual function with parameters', () => {
+            let cppclass = new CPPClass('PetThief');
+            let stealFxn = new CPPFunction('void', 'steal');
+
+            stealFxn.setPureVirtual(true);
+            stealFxn.setParentClass(cppclass, CPPVisibility.Public);
+
+            let fmtr = new CPPFormatter({
+                indentWithSpaces: true,
+                indentSpaceCount: 4,
+                bracesOnNewLine: true
+            });
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(
+                `
+class PetThief
+{
+    virtual void steal() = 0;
+};
+            `.trim()
+            );
+        });
+
+        it('should have a non-virtual function with parameters', () => {
+            let cppclass = new CPPClass('PetThief');
+            let stealFxn = new CPPFunction('void', 'release');
+
+            stealFxn.setVirtual(false);
+            stealFxn.setParentClass(cppclass, CPPVisibility.Public);
+
+            let fmtr = new CPPFormatter({
+                indentWithSpaces: true,
+                indentSpaceCount: 4,
+                bracesOnNewLine: true
+            });
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(
+                `
+class PetThief
+{
+    void release();
+};
+            `.trim()
+            );
         });
     });
 });

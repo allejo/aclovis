@@ -9,7 +9,11 @@
     "stripInternal": true,
     "target": "ES6",
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "outDir": "./built/",
+    "strict": true,
+    "lib": ["es6", "dom"],
+    "experimentalDecorators": true
   },
   "include": [
     "./src/**/*"

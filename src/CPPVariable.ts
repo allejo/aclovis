@@ -1,4 +1,5 @@
 import CPPFormatter from './CPPFormatter';
+import CPPWritableObject from './CPPWritableObject';
 import ILanguageVariable from './ILanguageVariable';
 
 export default class CPPVariable implements ILanguageVariable {
@@ -44,35 +45,44 @@ export default class CPPVariable implements ILanguageVariable {
         return output;
     }
 
-    static createBoolean(name: string, value?: boolean): CPPVariable {
+    static createBoolean(name: string, value?: boolean | CPPVariable | CPPWritableObject): CPPVariable {
         return this.createVariable('bool', name, value, value ? 'true' : 'false');
     }
 
-    static createInt(name: string, value?: number): CPPVariable {
+    static createInt(name: string, value?: number | CPPVariable | CPPWritableObject): CPPVariable {
         return this.createVariable('int', name, value);
     }
 
-    static createDouble(name: string, value?: number): CPPVariable {
+    static createDouble(name: string, value?: number | CPPVariable | CPPWritableObject): CPPVariable {
         return this.createVariable('double', name, value);
     }
 
-    static createFloat(name: string, value?: number): CPPVariable {
+    static createFloat(name: string, value?: number | CPPVariable | CPPWritableObject): CPPVariable {
         return this.createVariable('float', name, value);
     }
 
-    static createConstChar(name: string, value?: string): CPPVariable {
+    static createConstChar(name: string, value?: string | CPPVariable | CPPWritableObject): CPPVariable {
         return this.createVariable('const char*', name, value, `"${value}"`);
     }
 
-    static createString(name: string, value?: string): CPPVariable {
+    static createString(name: string, value?: string | CPPVariable | CPPWritableObject): CPPVariable {
         return this.createVariable('std::string', name, value, `"${value}"`);
     }
 
     private static createVariable(type: string, name: string, rawValue?: any, literalValue?: any) {
+        let evaluatedValue: string | null = null;
+
         if (rawValue == null) {
             return new CPPVariable(type, name);
+        } else if (rawValue instanceof CPPVariable) {
+            evaluatedValue = rawValue.getVariableName();
+        } else if (rawValue instanceof CPPWritableObject) {
+            evaluatedValue = rawValue.write(new CPPFormatter());
+
+            // Remove a trailing ';' if there is one
+            evaluatedValue = evaluatedValue.replace(/;$/, '');
         }
 
-        return new CPPVariable(type, name, literalValue || rawValue);
+        return new CPPVariable(type, name, evaluatedValue || literalValue || rawValue);
     }
 }
