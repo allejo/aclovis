@@ -1,6 +1,6 @@
-import CPPCodeBlock from '../src/CPPCodeBlock';
-import CPPFormatter from '../src/CPPFormatter';
-import CPPVariable from '../src/CPPVariable';
+import CPPCodeBlock from '../src/cpp/CPPCodeBlock';
+import CPPFormatter from '../src/cpp/CPPFormatter';
+import CPPVariable from '../src/cpp/CPPVariable';
 import { expect } from 'chai';
 import 'mocha';
 

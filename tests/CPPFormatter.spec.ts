@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
-import CPPFormatter from '../src/CPPFormatter';
+import CPPFormatter from '../src/cpp/CPPFormatter';
 import IFormatOptions from '../src/IFormatOptions';
 
 describe('CPP Formatter', () => {

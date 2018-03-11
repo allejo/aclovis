@@ -1,6 +1,6 @@
-import CPPHelper from '../src/CPPHelper';
-import CPPVariable from '../src/CPPVariable';
-import CPPFormatter from '../src/CPPFormatter';
+import CPPHelper from '../src/cpp/CPPHelper';
+import CPPVariable from '../src/cpp/CPPVariable';
+import CPPFormatter from '../src/cpp/CPPFormatter';
 import { expect } from 'chai';
 import 'mocha';
 

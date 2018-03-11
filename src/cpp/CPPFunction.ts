@@ -2,9 +2,9 @@ import CPPClass from './CPPClass';
 import CPPCodeBlock from './CPPCodeBlock';
 import CPPFormatter from './CPPFormatter';
 import CPPVariable from './CPPVariable';
-import { CPPVisibility } from './CPPVisibility';
-import ILanguageFunction from './ILanguageFunction';
-import IWritable from './IWritable';
+import CPPVisibility from './CPPVisibility';
+import ILanguageFunction from '../ILanguageFunction';
+import IWritable from '../IWritable';
 
 export default class CPPFunction implements ILanguageFunction {
     private parentClass?: CPPClass;

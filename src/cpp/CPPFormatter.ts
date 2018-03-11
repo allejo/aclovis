@@ -1,5 +1,5 @@
-import IFormatOptions from './IFormatOptions';
-import ILanguageFormatter from './ILanguageFormatter';
+import IFormatOptions from '../IFormatOptions';
+import ILanguageFormatter from '../ILanguageFormatter';
 
 export default class CPPFormatter implements ILanguageFormatter {
     readonly indentation: string;

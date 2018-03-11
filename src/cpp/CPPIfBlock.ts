@@ -1,8 +1,8 @@
 import CPPCodeBlock from './CPPCodeBlock';
-import ILanguageCodeBlock from './ILanguageCodeBlock';
-import ILanguageFormatter from './ILanguageFormatter';
-import ILanguageIfBlock from './ILanguageIfBlock';
-import IWritable from './IWritable';
+import ILanguageCodeBlock from '../ILanguageCodeBlock';
+import ILanguageFormatter from '../ILanguageFormatter';
+import ILanguageIfBlock from '../ILanguageIfBlock';
+import IWritable from '../IWritable';
 
 export default class CPPIfBlock implements ILanguageIfBlock {
     conditions: { [condition: string]: IWritable[] } = {};

@@ -1,5 +1,5 @@
-import CPPComment from '../src/CPPComment';
-import CPPFormatter from '../src/CPPFormatter';
+import CPPComment from '../src/cpp/CPPComment';
+import CPPFormatter from '../src/cpp/CPPFormatter';
 import { expect } from 'chai';
 import 'mocha';
 

@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
     "noImplicitAny": true,
-    "pretty": false,
-    "removeComments": true,
     "preserveConstEnums": true,
-    "sourceMap": true,
-    "declaration": false,
+    "removeComments": true,
+    "sourceMap": false,
     "stripInternal": true,
-    "target": "ES6",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "./built/",
-    "strict": true,
     "lib": ["es6", "dom"],
-    "experimentalDecorators": true
+    "target": "es2016",
+    "module": "commonjs",
+    "declaration": true,
+    "declarationDir": "./dist/declarations/",
+    "outDir": "./dist/typescript/",
+    "strict": true
   },
   "include": [
     "./src/**/*"

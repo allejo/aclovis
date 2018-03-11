@@ -1,5 +1,5 @@
 import CPPFormatter from './CPPFormatter';
-import IWritable from './IWritable';
+import IWritable from '../IWritable';
 
 export default class CPPWritableObject implements IWritable {
     constructor(readonly content: string) {}

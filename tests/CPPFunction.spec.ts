@@ -1,8 +1,8 @@
-import CPPClass from '../src/CPPClass';
-import CPPFunction from '../src/CPPFunction';
-import CPPFormatter from '../src/CPPFormatter';
-import CPPVariable from '../src/CPPVariable';
-import { CPPVisibility } from '../src/CPPVisibility';
+import CPPClass from '../src/cpp/CPPClass';
+import CPPFunction from '../src/cpp/CPPFunction';
+import CPPFormatter from '../src/cpp/CPPFormatter';
+import CPPVariable from '../src/cpp/CPPVariable';
+import CPPVisibility from '../src/cpp/CPPVisibility';
 import { expect } from 'chai';
 import 'mocha';
 

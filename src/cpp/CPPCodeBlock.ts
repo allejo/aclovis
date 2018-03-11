@@ -1,6 +1,6 @@
 import CPPFormatter from './CPPFormatter';
-import ILanguageCodeBlock from './ILanguageCodeBlock';
-import IWritable from './IWritable';
+import ILanguageCodeBlock from '../ILanguageCodeBlock';
+import IWritable from '../IWritable';
 
 export default class CPPCodeBlock implements ILanguageCodeBlock {
     constructor(readonly signature: string, public body: IWritable[] = []) {}

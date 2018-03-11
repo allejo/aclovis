@@ -1,24 +1,24 @@
 import CPPFormatter from './CPPFormatter';
 import CPPFunction from './CPPFunction';
-import { CPPVisibility } from './CPPVisibility';
-import ILanguageClass from './ILanguageClass';
+import CPPVisibility from './CPPVisibility';
+import ILanguageClass from '../ILanguageClass';
 import CPPCodeBlock from './CPPCodeBlock';
 import CPPWritableObject from './CPPWritableObject';
 
-interface FunctionDefinition {
+export interface CPPFunctionDefinition {
     virtual: boolean;
     visibility: CPPVisibility;
     functionDef: CPPFunction;
 }
 
-interface FunctionStorage {
-    [name: string]: FunctionDefinition;
+export interface CPPFunctionStorage {
+    [name: string]: CPPFunctionDefinition;
 }
 
 export default class CPPClass implements ILanguageClass {
     private classIncludes: string[] = [];
     private classExtends: [string, CPPClass | string][] = [];
-    private methods: FunctionStorage = {};
+    private methods: CPPFunctionStorage = {};
 
     /**
      * @param name The name of the class
@@ -35,7 +35,7 @@ export default class CPPClass implements ILanguageClass {
         return this.name;
     }
 
-    getMethods(): FunctionStorage {
+    getMethods(): CPPFunctionStorage {
         return this.methods;
     }
 
@@ -111,7 +111,7 @@ export default class CPPClass implements ILanguageClass {
         output.push(this.writeHeaderBlock(formatter, indentCount));
 
         for (let key in this.methods) {
-            let fxn: FunctionDefinition = this.methods[key];
+            let fxn: CPPFunctionDefinition = this.methods[key];
 
             output.push(fxn.functionDef.write(formatter, indentCount));
         }
@@ -144,7 +144,7 @@ export default class CPPClass implements ILanguageClass {
 
         for (let key in this.methods) {
             let output = '';
-            let fxn: FunctionDefinition = this.methods[key];
+            let fxn: CPPFunctionDefinition = this.methods[key];
 
             if (fxn.virtual) {
                 output += 'virtual ';
