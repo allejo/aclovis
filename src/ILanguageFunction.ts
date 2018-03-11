@@ -1,6 +1,6 @@
 import ILanguageClass from './ILanguageClass';
 import ILanguageVariable from './ILanguageVariable';
-import IWritable from './IWritable';
+import IWritable from './ILanguageWritable';
 
 export default interface ILanguageFunction extends IWritable {
     getParentClass(): ILanguageClass | null;

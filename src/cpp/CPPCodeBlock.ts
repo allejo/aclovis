@@ -1,9 +1,9 @@
 import CPPFormatter from './CPPFormatter';
 import ILanguageCodeBlock from '../ILanguageCodeBlock';
-import IWritable from '../IWritable';
+import ILanguageWritable from '../ILanguageWritable';
 
 export default class CPPCodeBlock implements ILanguageCodeBlock {
-    constructor(readonly signature: string, public body: IWritable[] = []) {}
+    constructor(readonly signature: string, public body: ILanguageWritable[] = []) {}
 
     write(formatter: CPPFormatter, indentCount: number = 0): string {
         const indent = formatter.indentation.repeat(indentCount);

@@ -1,4 +1,4 @@
-import IWritable from './IWritable';
+import IWritable from './ILanguageWritable';
 
 export default interface ILanguageIfBlock extends IWritable {
     defineCondition(condition: string, body: IWritable[]): this;

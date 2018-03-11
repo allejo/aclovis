@@ -17,7 +17,7 @@ import ILanguageFormatter from './ILanguageFormatter';
 import ILanguageFunction from './ILanguageFunction';
 import ILanguageIfBlock from './ILanguageIfBlock';
 import ILanguageVariable from './ILanguageVariable';
-import IWritable from './IWritable';
+import ILanguageWritable from './ILanguageWritable';
 
 export {
     CPPClass,
@@ -38,5 +38,5 @@ export {
     ILanguageFunction,
     ILanguageIfBlock,
     ILanguageVariable,
-    IWritable
+    ILanguageWritable
 }

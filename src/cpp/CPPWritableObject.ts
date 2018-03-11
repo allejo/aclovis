@@ -1,7 +1,7 @@
 import CPPFormatter from './CPPFormatter';
-import IWritable from '../IWritable';
+import ILanguageWritable from '../ILanguageWritable';
 
-export default class CPPWritableObject implements IWritable {
+export default class CPPWritableObject implements ILanguageWritable {
     constructor(readonly content: string) {}
 
     write(formatter: CPPFormatter, indentCount: number = 0): string {

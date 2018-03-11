@@ -4,11 +4,11 @@ import CPPFormatter from './CPPFormatter';
 import CPPVariable from './CPPVariable';
 import CPPVisibility from './CPPVisibility';
 import ILanguageFunction from '../ILanguageFunction';
-import IWritable from '../IWritable';
+import ILanguageWritable from '../ILanguageWritable';
 
 export default class CPPFunction implements ILanguageFunction {
     private parentClass?: CPPClass;
-    private body: IWritable[] = [];
+    private body: ILanguageWritable[] = [];
     private virtual: boolean = false;
     private pureVirtual: boolean = false;
 
@@ -41,11 +41,11 @@ export default class CPPFunction implements ILanguageFunction {
         return output;
     }
 
-    implementFunction(body: IWritable[]): void {
+    implementFunction(body: ILanguageWritable[]): void {
         this.body = body;
     }
 
-    appendFunction(body: IWritable | IWritable[]): void {
+    appendFunction(body: ILanguageWritable | ILanguageWritable[]): void {
         if (body instanceof Array) {
             this.body = this.body.concat(body);
         } else {

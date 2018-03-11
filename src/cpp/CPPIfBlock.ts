@@ -2,21 +2,21 @@ import CPPCodeBlock from './CPPCodeBlock';
 import ILanguageCodeBlock from '../ILanguageCodeBlock';
 import ILanguageFormatter from '../ILanguageFormatter';
 import ILanguageIfBlock from '../ILanguageIfBlock';
-import IWritable from '../IWritable';
+import ILanguageWritable from '../ILanguageWritable';
 
 export default class CPPIfBlock implements ILanguageIfBlock {
-    conditions: { [condition: string]: IWritable[] } = {};
-    elseCondition: IWritable[] = [];
+    conditions: { [condition: string]: ILanguageWritable[] } = {};
+    elseCondition: ILanguageWritable[] = [];
 
     constructor() {}
 
-    defineCondition(condition: string, body: IWritable[]): this {
+    defineCondition(condition: string, body: ILanguageWritable[]): this {
         this.conditions[condition] = body;
 
         return this;
     }
 
-    defineElseCondition(body: IWritable[]): this {
+    defineElseCondition(body: ILanguageWritable[]): this {
         this.elseCondition = body;
 
         return this;

@@ -1,4 +1,4 @@
-import IWritable from './IWritable';
+import IWritable from './ILanguageWritable';
 
 export default interface ILanguageComment extends IWritable {
     appendBody(body: string | string[]): void;

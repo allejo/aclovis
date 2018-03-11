@@ -1,4 +1,4 @@
-import IWritable from './IWritable';
+import IWritable from './ILanguageWritable';
 
 export default interface ILanguageCodeBlock extends IWritable {};
 
