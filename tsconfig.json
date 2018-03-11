@@ -11,8 +11,8 @@
     "target": "es2016",
     "module": "commonjs",
     "declaration": true,
-    "declarationDir": "./dist/declarations/",
-    "outDir": "./dist/typescript/",
+    "declarationDir": "./dist/",
+    "outDir": "./build/",
     "strict": true
   },
   "include": [

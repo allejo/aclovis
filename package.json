@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "description": "A library to generate C++ code in TypeScript",
   "private": false,
-  "main": "dist/babel/index.js",
-  "typings": "dist/declarations/index.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "directories": {
     "test": "tests"
   },
@@ -20,7 +20,7 @@
     "typescript": "^2.7.2"
   },
   "scripts": {
-    "babel": "babel dist/typescript/ -d dist/babel/",
+    "babel": "babel build/ -d dist/",
     "compile": "tsc -p ./",
     "build": "npm run compile && npm run babel",
     "prettify": "prettier --write \"{src,tests}/**/*\"",
