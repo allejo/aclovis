@@ -44,6 +44,6 @@ export default class CPPComment implements ILanguageComment {
             output += `${indent} */`;
         }
 
-        return output.trim();
+        return output.replace(/[\s|\n]*$/g, '');
     }
 }

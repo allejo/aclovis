@@ -48,9 +48,9 @@ export default class CPPIfBlock implements ILanguageIfBlock {
         let output: string = '';
 
         ifBlocks.forEach(element => {
-            output += element.write(formatter, indentCount) + '\n' + formatter.indentation.repeat(indentCount);
+            output += element.write(formatter, indentCount) + '\n';
         });
 
-        return output.trim();
+        return output.replace(/[\s\n]*$/g, '');
     }
 }
