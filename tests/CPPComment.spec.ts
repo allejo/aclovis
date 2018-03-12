@@ -111,4 +111,48 @@ describe('C++ Comments', () => {
         `.trim()
         );
     });
+
+    it('single line comments should be indented', () => {
+        let comment = new CPPComment(
+            ['My first comment', 'A second line', '', 'an empty comment before this line'],
+            false
+        );
+        let format = new CPPFormatter({
+            indentSpaceCount: 4,
+            indentWithSpaces: true
+        });
+        let output = comment.write(format, 1);
+
+        expect(output).to.equal(
+            `
+    // My first comment
+    // A second line
+    //
+    // an empty comment before this line
+        `.trim()
+        );
+    });
+
+    it('block comments should be indented', () => {
+        let comment = new CPPComment(
+            ['My first comment', 'A second line', '', 'an empty comment before this line'],
+            true
+        );
+        let format = new CPPFormatter({
+            indentSpaceCount: 4,
+            indentWithSpaces: true
+        });
+        let output = comment.write(format, 1);
+
+        expect(output).to.equal(
+            `
+    /*
+     * My first comment
+     * A second line
+     *
+     * an empty comment before this line
+     */
+        `.trim()
+        );
+    });
 });

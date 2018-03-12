@@ -2,7 +2,15 @@ import CPPFormatter from './CPPFormatter';
 import ILanguageComment from '../ILanguageComment';
 
 export default class CPPComment implements ILanguageComment {
-    constructor(private body: string[], private blockType: boolean) {}
+    private body: string[];
+
+    constructor(body: string | string[], private blockType: boolean) {
+        if (body instanceof Array) {
+            this.body = body;
+        } else {
+            this.body = [body];
+        }
+    }
 
     appendBody(body: string | string[]): void {
         if (body instanceof Array) {
@@ -24,9 +32,9 @@ export default class CPPComment implements ILanguageComment {
             let _line = `${indent}`;
 
             if (this.blockType) {
-                _line = ` * ${element}`;
+                _line += ` * ${element}`;
             } else {
-                _line = `// ${element}`;
+                _line += `// ${element}`;
             }
 
             output += `${_line.replace(/\s+$/, '')}\n`;
