@@ -1,6 +1,7 @@
 import CPPCodeBlock from '../src/cpp/CPPCodeBlock';
 import CPPFormatter from '../src/cpp/CPPFormatter';
 import CPPVariable from '../src/cpp/CPPVariable';
+import { multiLineString } from './helpers';
 import { expect } from 'chai';
 import 'mocha';
 
@@ -14,14 +15,13 @@ describe('C++ Code Blocks', () => {
                 bracesOnNewLine: true
             });
             let output = block.write(format);
-
-            expect(output).to.equal(
-                `
+            let expected = multiLineString(`
 int main()
 {
 }
-            `.trim()
-            );
+            `);
+
+            expect(output).to.equal(expected);
         });
 
         it('should have braces on same line', () => {
@@ -32,13 +32,12 @@ int main()
                 bracesOnNewLine: false
             });
             let output = block.write(format);
-
-            expect(output).to.equal(
-                `
+            let expected = multiLineString(`
 int main() {
 }
-            `.trim()
-            );
+            `);
+
+            expect(output).to.equal(expected);
         });
     });
 
@@ -54,14 +53,13 @@ int main() {
             block.body.push(CPPVariable.createString('password', 'my super password'));
 
             let output = block.write(format);
-
-            expect(output).to.equal(
-                `
+            let expected = multiLineString(`
 int main() {
     std::string password = "my super password";
 }
-            `.trim()
-            );
+            `);
+
+            expect(output).to.equal(expected);
         });
 
         it('should have nested code blocks with braces on new line', () => {
@@ -77,9 +75,7 @@ int main() {
             block.body.push(struct);
 
             let output = block.write(format);
-
-            expect(output).to.equal(
-                `
+            let expected = multiLineString(`
 class Toast
 {
     struct Cheese
@@ -87,8 +83,9 @@ class Toast
         std::string name;
     }
 }
-            `.trim()
-            );
+            `);
+
+            expect(output).to.equal(expected);
         });
 
         it('should have nested code blocks with braces on same line', () => {
@@ -104,16 +101,15 @@ class Toast
             block.body.push(struct);
 
             let output = block.write(format);
-
-            expect(output).to.equal(
-                `
+            let expected = multiLineString(`
 class Toast {
     struct Cheese {
         std::string name;
     }
 }
-            `.trim()
-            );
+            `);
+
+            expect(output).to.equal(expected);
         });
     });
 });

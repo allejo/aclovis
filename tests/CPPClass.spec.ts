@@ -5,6 +5,7 @@ import CPPVariable from '../src/cpp/CPPVariable';
 import CPPVisibility from '../src/cpp/CPPVisibility';
 import { expect } from 'chai';
 import 'mocha';
+import { multiLineString } from './helpers';
 
 describe('C++ Classes', () => {
     describe('class names', () => {
@@ -82,13 +83,13 @@ describe('C++ Classes', () => {
                 bracesOnNewLine: true
             });
 
-            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(
-                `
+            let expected = multiLineString(`
 class PetThief
 {
 };
-            `.trim()
-            );
+            `);
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
         });
 
         it('should have a virtual function', () => {
@@ -103,15 +104,14 @@ class PetThief
                 indentSpaceCount: 4,
                 bracesOnNewLine: true
             });
-
-            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(
-                `
+            let expected = multiLineString(`
 class PetThief
 {
     virtual void steal();
 };
-            `.trim()
-            );
+            `);
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
         });
 
         it('should have a virtual function with parameters', () => {
@@ -129,15 +129,14 @@ class PetThief
                 indentSpaceCount: 4,
                 bracesOnNewLine: true
             });
-
-            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(
-                `
+            let expected = multiLineString(`
 class PetThief
 {
     virtual void steal(int owner, int target = -1);
 };
-            `.trim()
-            );
+            `);
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
         });
 
         it('should have a pure virtual function with parameters', () => {
@@ -152,15 +151,14 @@ class PetThief
                 indentSpaceCount: 4,
                 bracesOnNewLine: true
             });
-
-            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(
-                `
+            let expected = multiLineString(`
 class PetThief
 {
     virtual void steal() = 0;
 };
-            `.trim()
-            );
+            `);
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
         });
 
         it('should have a non-virtual function with parameters', () => {
@@ -175,15 +173,14 @@ class PetThief
                 indentSpaceCount: 4,
                 bracesOnNewLine: true
             });
-
-            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(
-                `
+            let expected = multiLineString(`
 class PetThief
 {
     void release();
 };
-            `.trim()
-            );
+            `);
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
         });
     });
 });

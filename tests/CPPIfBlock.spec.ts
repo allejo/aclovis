@@ -3,6 +3,7 @@ import CPPFormatter from '../src/cpp/CPPFormatter';
 import CPPVariable from '../src/cpp/CPPVariable';
 import { expect } from 'chai';
 import 'mocha';
+import { multiLineString } from './helpers';
 
 describe('C++ If Statement', () => {
     let format = new CPPFormatter({
@@ -17,14 +18,13 @@ describe('C++ If Statement', () => {
         ifStatement.defineCondition('1 == 1', [CPPVariable.createString('variable')]);
 
         let output = ifStatement.write(format);
-
-        expect(output).to.equal(
-            `
+        let expected = multiLineString(`
 if (1 == 1) {
     std::string variable;
 }
-        `.trim()
-        );
+        `);
+
+        expect(output).to.equal(expected);
     });
 
     it('should have an if and an else if', () => {
@@ -34,17 +34,16 @@ if (1 == 1) {
         ifStatement.defineCondition('var == 2', [CPPVariable.createString('toast')]);
 
         let output = ifStatement.write(format);
-
-        expect(output).to.equal(
-            `
+        let expected = multiLineString(`
 if (var == 1) {
     std::string variable;
 }
 else if (var == 2) {
     std::string toast;
 }
-        `.trim()
-        );
+        `);
+
+        expect(output).to.equal(expected);
     });
 
     it('should have an if and an else', () => {
@@ -54,17 +53,16 @@ else if (var == 2) {
         ifStatement.defineElseCondition([CPPVariable.createString('toast')]);
 
         let output = ifStatement.write(format);
-
-        expect(output).to.equal(
-            `
+        let expected = multiLineString(`
 if (var == 1) {
     std::string variable;
 }
 else {
     std::string toast;
 }
-        `.trim()
-        );
+        `);
+
+        expect(output).to.equal(expected);
     });
 
     it('should have an if, else if, and an else', () => {
@@ -75,9 +73,7 @@ else {
         ifStatement.defineElseCondition([CPPVariable.createString('toast')]);
 
         let output = ifStatement.write(format);
-
-        expect(output).to.equal(
-            `
+        let expected = multiLineString(`
 if (var == 1) {
     std::string variable;
 }
@@ -87,7 +83,31 @@ else if (var == 2) {
 else {
     std::string toast;
 }
-        `.trim()
-        );
+        `);
+
+        expect(output).to.equal(expected);
+    });
+
+    it('should have an if, else if, and an else', () => {
+        let ifStatement = new CPPIfBlock();
+
+        ifStatement.defineCondition('var == 1', [CPPVariable.createString('variable')]);
+        ifStatement.defineCondition('var == 2', [CPPVariable.createString('bread')]);
+        ifStatement.defineElseCondition([CPPVariable.createString('toast')]);
+
+        let output = ifStatement.write(format, 1);
+        let expected = multiLineString(`
+    if (var == 1) {
+        std::string variable;
+    }
+    else if (var == 2) {
+        std::string bread;
+    }
+    else {
+        std::string toast;
+    }
+        `);
+
+        expect(output).to.equal(expected);
     });
 });

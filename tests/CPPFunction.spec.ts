@@ -5,6 +5,7 @@ import CPPVariable from '../src/cpp/CPPVariable';
 import CPPVisibility from '../src/cpp/CPPVisibility';
 import { expect } from 'chai';
 import 'mocha';
+import { multiLineString } from './helpers';
 
 describe('C++ Functions', () => {
     describe('names + parameters', () => {
@@ -16,13 +17,12 @@ describe('C++ Functions', () => {
                 bracesOnNewLine: false
             });
             let output = fxn.write(format);
-
-            expect(output).to.equal(
-                `
+            let expected = multiLineString(`
 std::string printHello() {
 }
-            `.trim()
-            );
+            `);
+
+            expect(output).to.equal(expected);
         });
 
         it('should have parameters with one default', () => {
@@ -35,13 +35,12 @@ std::string printHello() {
                 bracesOnNewLine: false
             });
             let output = fxn.write(format);
-
-            expect(output).to.equal(
-                `
+            let expected = multiLineString(`
 std::string welcomeGuest(std::string guest, std::string suffix = "!") {
 }
-            `.trim()
-            );
+            `);
+
+            expect(output).to.equal(expected);
         });
 
         it('should have parameters with no defaults', () => {
@@ -54,14 +53,13 @@ std::string welcomeGuest(std::string guest, std::string suffix = "!") {
                 bracesOnNewLine: true
             });
             let output = fxn.write(format);
-
-            expect(output).to.equal(
-                `
+            let expected = multiLineString(`
 std::string welcomeGuest(std::string guest, std::string suffix)
 {
 }
-            `.trim()
-            );
+            `);
+
+            expect(output).to.equal(expected);
         });
 
         it('should have class prefix on write', () => {
@@ -75,14 +73,13 @@ std::string welcomeGuest(std::string guest, std::string suffix)
                 bracesOnNewLine: true
             });
             let output = fxn.write(format);
-
-            expect(output).to.equal(
-                `
+            let expected = multiLineString(`
 void BaseClass::burnToast()
 {
 }
-            `.trim()
-            );
+            `);
+
+            expect(output).to.equal(expected);
         });
 
         it('should have a body with variables', () => {
@@ -97,15 +94,14 @@ void BaseClass::burnToast()
                 bracesOnNewLine: true
             });
             let output = fxn.write(format);
-
-            expect(output).to.equal(
-                `
+            let expected = multiLineString(`
 void myFunction()
 {
   int life = 42;
 }
-            `.trim()
-            );
+            `);
+
+            expect(output).to.equal(expected);
         });
 
         it('should support the function body being appended to', () => {
@@ -120,16 +116,15 @@ void myFunction()
                 bracesOnNewLine: true
             });
             let output = fxn.write(format);
-
-            expect(output).to.equal(
-                `
+            let expected = multiLineString(`
 void myAppendFunction()
 {
   int life = 42;
   bool isToast = true;
 }
-            `.trim()
-            );
+            `);
+
+            expect(output).to.equal(expected);
         });
     });
 });

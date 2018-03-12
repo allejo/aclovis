@@ -1,5 +1,6 @@
 import CPPComment from '../src/cpp/CPPComment';
 import CPPFormatter from '../src/cpp/CPPFormatter';
+import { multiLineString } from './helpers';
 import { expect } from 'chai';
 import 'mocha';
 
@@ -12,13 +13,12 @@ describe('C++ Comments', () => {
                 indentWithSpaces: true
             });
             let output = comment.write(format);
-
-            expect(output).to.equal(
-                `
+            let expected = multiLineString(`
 /*
  */
-            `.trim()
-            );
+            `);
+
+            expect(output).to.equal(expected);
         });
 
         it('should have asterisks and content', () => {
@@ -31,17 +31,16 @@ describe('C++ Comments', () => {
                 indentWithSpaces: true
             });
             let output = comment.write(format);
-
-            expect(output).to.equal(
-                `
+            let expected = multiLineString(`
 /*
  * My first line
  * A second line for my comment
  *
  * A non-empty line following an empty line
  */
-            `.trim()
-            );
+            `);
+
+            expect(output).to.equal(expected);
         });
     });
 
@@ -53,11 +52,9 @@ describe('C++ Comments', () => {
                 indentWithSpaces: true
             });
             let output = comment.write(format);
+            let expected = ``;
 
-            expect(output).to.equal(
-                `
-            `.trim()
-            );
+            expect(output).to.equal(expected);
         });
 
         it('should have an empty "//" with an empty string', () => {
@@ -67,12 +64,9 @@ describe('C++ Comments', () => {
                 indentWithSpaces: true
             });
             let output = comment.write(format);
+            let expected = `//`;
 
-            expect(output).to.equal(
-                `
-//
-            `.trim()
-            );
+            expect(output).to.equal(expected);
         });
     });
 
@@ -83,12 +77,9 @@ describe('C++ Comments', () => {
             indentWithSpaces: true
         });
         let output = comment.write(format);
+        let expected = `// A single line comment`;
 
-        expect(output).to.equal(
-            `
-// A single line comment
-        `.trim()
-        );
+        expect(output).to.equal(expected);
     });
 
     it('should multiple single line comments should each use "//"', () => {
@@ -101,18 +92,17 @@ describe('C++ Comments', () => {
             indentWithSpaces: true
         });
         let output = comment.write(format);
-
-        expect(output).to.equal(
-            `
+        let expected = multiLineString(`
 // My first comment
 // A second line
 //
 // an empty comment before this line
-        `.trim()
-        );
+        `);
+
+        expect(output).to.equal(expected);
     });
 
-    it('single line comments should be indented', () => {
+    it('single line comments should be indented once', () => {
         let comment = new CPPComment(
             ['My first comment', 'A second line', '', 'an empty comment before this line'],
             false
@@ -121,19 +111,19 @@ describe('C++ Comments', () => {
             indentSpaceCount: 4,
             indentWithSpaces: true
         });
-        let output = comment.write(format, 1);
 
-        expect(output).to.equal(
-            `
+        let output = comment.write(format, 1);
+        let expected = multiLineString(`
     // My first comment
     // A second line
     //
     // an empty comment before this line
-        `.trim()
-        );
+        `);
+
+        expect(output).to.equal(expected);
     });
 
-    it('block comments should be indented', () => {
+    it('block comments should be indented once', () => {
         let comment = new CPPComment(
             ['My first comment', 'A second line', '', 'an empty comment before this line'],
             true
@@ -142,17 +132,17 @@ describe('C++ Comments', () => {
             indentSpaceCount: 4,
             indentWithSpaces: true
         });
-        let output = comment.write(format, 1);
 
-        expect(output).to.equal(
-            `
+        let output = comment.write(format, 1);
+        let expected = multiLineString(`
     /*
      * My first comment
      * A second line
      *
      * an empty comment before this line
      */
-        `.trim()
-        );
+        `);
+
+        expect(output).to.equal(expected);
     });
 });
