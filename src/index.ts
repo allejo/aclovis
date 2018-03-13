@@ -5,6 +5,7 @@ import CPPFormatter from './cpp/CPPFormatter';
 import CPPFunction from './cpp/CPPFunction';
 import CPPHelper from './cpp/CPPHelper';
 import CPPIfBlock from './cpp/CPPIfBlock';
+import CPPSwitchBlock from './cpp/CPPSwitchBlock';
 import CPPVariable from './cpp/CPPVariable';
 import CPPVisibility from './cpp/CPPVisibility';
 import CPPWritableObject from './cpp/CPPWritableObject';
@@ -27,6 +28,7 @@ export {
     CPPFunction,
     CPPHelper,
     CPPIfBlock,
+    CPPSwitchBlock,
     CPPVariable,
     CPPVisibility,
     CPPWritableObject,
