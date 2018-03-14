@@ -1,5 +1,5 @@
 {
-  "name": "alyssa",
+  "name": "aclovis",
   "version": "0.0.0",
   "description": "A library to generate C++ code in TypeScript",
   "private": false,
@@ -28,12 +28,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/allejo/alyssa.git"
+    "url": "git+https://github.com/allejo/aclovis.git"
   },
   "author": "Vladimir \"allejo\" Jimenez",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/allejo/alyssa/issues"
+    "url": "https://github.com/allejo/aclovis/issues"
   },
-  "homepage": "https://github.com/allejo/alyssa#readme"
+  "homepage": "https://github.com/allejo/aclovis#readme"
 }

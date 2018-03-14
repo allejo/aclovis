@@ -1,4 +1,4 @@
-# alyssa
+# aclovis
 
 > :warning: :construction: :construction: :construction: :warning:
 >
@@ -6,7 +6,7 @@
 >
 > This project is my learning ground for the JS world. So if you're a JS expert (or you just know the pain I'm going through by entering the JS world) and you have an unsolicited advice/tips, they are welcome and I'd highly appreciate it!
 
-Welcome to project alyssa! A library that allows you to programmatically generate C++ code (and maybe other languages in the future) from JavaScript or Typescript.
+Welcome to aclovis! A library that allows you to programmatically generate C++ code (and maybe other languages in the future) from JavaScript or Typescript.
 
 As mentioned in the beginning, this project is incredibly young and will likely be changing a lot. The fact that this project is starting at version 0.0.0 should be a sign of its stability. You have been warned!
 
@@ -19,7 +19,7 @@ For my [BZFlag Plug-in Starter](https://github.com/allejo/bzflagPluginStarter2),
 For the most up to date examples and functionality, it is highly recommended that you look at the [unit tests](/tests/) for the project.
 
 ```js
-import { CPPClass, CPPFormatter, CPPFunction, CPPVariable, CPPVisibility } from 'alyssa';
+import { CPPClass, CPPFormatter, CPPFunction, CPPVariable, CPPVisibility } from 'aclovis';
 
 let cppclass = new CPPClass('PetThief');
 let stealFxn = new CPPFunction('void', 'steal', [
