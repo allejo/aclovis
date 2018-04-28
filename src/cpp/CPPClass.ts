@@ -1,6 +1,8 @@
+import ILanguageWritable from '../ILanguageWritable';
 import CPPFormatter from './CPPFormatter';
 import CPPFunction from './CPPFunction';
 import CPPHelper from './CPPHelper';
+import CPPVariable from './CPPVariable';
 import CPPVisibility from './CPPVisibility';
 import ILanguageClass from '../ILanguageClass';
 import CPPCodeBlock from './CPPCodeBlock';
@@ -16,10 +18,20 @@ export interface CPPFunctionStorage {
     [name: string]: CPPFunctionDefinition;
 }
 
+export interface CPPVariableDefinition {
+    visibility: CPPVisibility;
+    variable: CPPVariable;
+}
+
+export interface CPPVariableStorage {
+    [name: string]: CPPVariableDefinition;
+}
+
 export default class CPPClass implements ILanguageClass {
     private classIncludes: string[] = [];
     private classExtends: [string, CPPClass | string][] = [];
     private methods: CPPFunctionStorage = {};
+    private variables: CPPVariableStorage = {};
 
     /**
      * @param name The name of the class
@@ -45,6 +57,17 @@ export default class CPPClass implements ILanguageClass {
             virtual: virtual,
             visibility: visibility,
             functionDef: fxn
+        };
+    }
+
+    getVariables(): CPPVariableStorage {
+        return this.variables;
+    }
+
+    addVariable(variable: CPPVariable, visibility: CPPVisibility) {
+        this.variables[variable.getVariableName()] = {
+            visibility: visibility,
+            variable: variable
         };
     }
 
@@ -146,7 +169,12 @@ export default class CPPClass implements ILanguageClass {
             [CPPVisibility.Protected]: [],
             [CPPVisibility.Private]: []
         };
-        let classDefinitionBody: CPPWritableObject[] = [];
+        let instanceVariables: { [key: string]: ILanguageWritable[] } = {
+            [CPPVisibility.Public]: [],
+            [CPPVisibility.Protected]: [],
+            [CPPVisibility.Private]: []
+        };
+        let classDefinitionBody: ILanguageWritable[] = [];
 
         for (let key in this.methods) {
             let output = '';
@@ -161,13 +189,33 @@ export default class CPPClass implements ILanguageClass {
             definitionBodies[fxn.visibility].push(new CPPWritableObject(output));
         }
 
+        for (let key in this.variables) {
+            let variable: CPPVariableDefinition = this.variables[key];
+
+            instanceVariables[variable.visibility].push(variable.variable);
+        }
+
         [CPPVisibility.Public, CPPVisibility.Protected, CPPVisibility.Private].forEach(function(
             visibility: CPPVisibility
         ) {
-            if (definitionBodies[visibility].length > 0) {
+            let fxnsExist = definitionBodies[visibility].length > 0;
+            let varsExist = instanceVariables[visibility].length > 0;
+
+            if (fxnsExist || varsExist) {
                 classDefinitionBody.push(CPPHelper.createEmptyLine());
                 classDefinitionBody.push(new CPPWritableObject(`${visibility}:`));
+            }
+
+            if (fxnsExist) {
                 classDefinitionBody.push(...definitionBodies[visibility]);
+            }
+
+            if (varsExist) {
+                if (fxnsExist) {
+                    classDefinitionBody.push(CPPHelper.createEmptyLine());
+                }
+
+                classDefinitionBody.push(...instanceVariables[visibility]);
             }
         });
 

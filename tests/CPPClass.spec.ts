@@ -187,6 +187,33 @@ public:
             expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
         });
 
+        it('should have a public function + instance variables', () => {
+            let cppclass = new CPPClass('PetThief');
+            let stealFxn = new CPPFunction('void', 'release');
+
+            stealFxn.setVirtual(false);
+            stealFxn.setParentClass(cppclass, CPPVisibility.Public);
+
+            cppclass.addVariable(CPPVariable.createInt('count'), CPPVisibility.Public);
+
+            let fmtr = new CPPFormatter({
+                indentWithSpaces: true,
+                indentSpaceCount: 4,
+                bracesOnNewLine: true
+            });
+            let expected = multiLineString(`
+class PetThief
+{
+public:
+    void release();
+
+    int count;
+};
+            `);
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
+        });
+
         it('should have a section of protected functions', () => {
             let cppclass = new CPPClass('PetThief');
             let stealFxn = new CPPFunction('void', 'release');
@@ -211,6 +238,44 @@ public:
 
 protected:
     void run();
+};
+            `);
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
+        });
+
+        it('should have a section of protected variables + a single private variable', () => {
+            let cppclass = new CPPClass('PetThief');
+            let stealFxn = new CPPFunction('void', 'release');
+            let runFxn = new CPPFunction('void', 'run');
+
+            stealFxn.setVirtual(false);
+            stealFxn.setParentClass(cppclass, CPPVisibility.Public);
+
+            runFxn.setVirtual(false);
+            runFxn.setParentClass(cppclass, CPPVisibility.Protected);
+
+            cppclass.addVariable(CPPVariable.createInt('petCount'), CPPVisibility.Protected);
+            cppclass.addVariable(CPPVariable.createConstChar('name'), CPPVisibility.Private);
+
+            let fmtr = new CPPFormatter({
+                indentWithSpaces: true,
+                indentSpaceCount: 4,
+                bracesOnNewLine: true
+            });
+            let expected = multiLineString(`
+class PetThief
+{
+public:
+    void release();
+
+protected:
+    void run();
+
+    int petCount;
+
+private:
+    const char* name;
 };
             `);
 
