@@ -74,9 +74,7 @@ switch (anEnum) {
     it('should only have a case with a body and a default', () => {
         let blk = new CPPSwitchBlock('anEnum');
 
-        blk.defineCase('ePoweredOn', [
-            CPPVariable.createString('hello', 'world')
-        ]);
+        blk.defineCase('ePoweredOn', [CPPVariable.createString('hello', 'world')]);
 
         let output = blk.write(format, 0);
         let expected = multiLineString(`
@@ -97,9 +95,7 @@ switch (anEnum) {
     it('should have a default with content', () => {
         let blk = new CPPSwitchBlock('anEnum');
 
-        blk.defineDefault([
-            CPPVariable.createString('hello', 'world')
-        ])
+        blk.defineDefault([CPPVariable.createString('hello', 'world')]);
 
         let output = blk.write(format, 0);
         let expected = multiLineString(`

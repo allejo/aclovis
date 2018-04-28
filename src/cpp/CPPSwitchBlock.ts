@@ -1,4 +1,4 @@
-import { ILanguageWritable, CPPIfBlock, CPPCodeBlock, CPPFormatter, CPPHelper } from "..";
+import { ILanguageWritable, CPPIfBlock, CPPCodeBlock, CPPFormatter, CPPHelper } from '..';
 
 export default class CPPSwitchBlock extends CPPIfBlock {
     constructor(readonly condition: string) {
