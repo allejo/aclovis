@@ -1,5 +1,6 @@
 import CPPFormatter from './CPPFormatter';
 import CPPFunction from './CPPFunction';
+import CPPHelper from './CPPHelper';
 import CPPVisibility from './CPPVisibility';
 import ILanguageClass from '../ILanguageClass';
 import CPPCodeBlock from './CPPCodeBlock';
@@ -140,6 +141,11 @@ export default class CPPClass implements ILanguageClass {
     }
 
     writeHeaderBlock(formatter: CPPFormatter, indentCount: number): string {
+        let definitionBodies: { [key: string]: CPPWritableObject[] } = {
+            [CPPVisibility.Public]: [],
+            [CPPVisibility.Protected]: [],
+            [CPPVisibility.Private]: []
+        };
         let classDefinitionBody: CPPWritableObject[] = [];
 
         for (let key in this.methods) {
@@ -152,11 +158,26 @@ export default class CPPClass implements ILanguageClass {
 
             output += fxn.functionDef.getSignature(true);
 
-            classDefinitionBody.push(new CPPWritableObject(output));
+            definitionBodies[fxn.visibility].push(new CPPWritableObject(output));
         }
+
+        [CPPVisibility.Public, CPPVisibility.Protected, CPPVisibility.Private].forEach(function(
+            visibility: CPPVisibility
+        ) {
+            if (definitionBodies[visibility].length > 0) {
+                classDefinitionBody.push(CPPHelper.createEmptyLine());
+                classDefinitionBody.push(new CPPWritableObject(`${visibility}:`));
+                classDefinitionBody.push(...definitionBodies[visibility]);
+            }
+        });
+
+        classDefinitionBody.shift();
 
         let blk = new CPPCodeBlock(this.writeClassSignature(), classDefinitionBody);
         let output = blk.write(formatter, indentCount);
+
+        let indentRegex = /^[ \t]+(public|protected|private):$/gm;
+        output = output.replace(indentRegex, '$1:');
 
         return output + ';';
     }

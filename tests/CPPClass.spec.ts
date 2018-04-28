@@ -107,6 +107,7 @@ class PetThief
             let expected = multiLineString(`
 class PetThief
 {
+public:
     virtual void steal();
 };
             `);
@@ -132,6 +133,7 @@ class PetThief
             let expected = multiLineString(`
 class PetThief
 {
+public:
     virtual void steal(int owner, int target = -1);
 };
             `);
@@ -154,6 +156,7 @@ class PetThief
             let expected = multiLineString(`
 class PetThief
 {
+public:
     virtual void steal() = 0;
 };
             `);
@@ -176,7 +179,75 @@ class PetThief
             let expected = multiLineString(`
 class PetThief
 {
+public:
     void release();
+};
+            `);
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
+        });
+
+        it('should have a section of protected functions', () => {
+            let cppclass = new CPPClass('PetThief');
+            let stealFxn = new CPPFunction('void', 'release');
+            let runFxn = new CPPFunction('void', 'run');
+
+            stealFxn.setVirtual(false);
+            stealFxn.setParentClass(cppclass, CPPVisibility.Public);
+
+            runFxn.setVirtual(false);
+            runFxn.setParentClass(cppclass, CPPVisibility.Protected);
+
+            let fmtr = new CPPFormatter({
+                indentWithSpaces: true,
+                indentSpaceCount: 4,
+                bracesOnNewLine: true
+            });
+            let expected = multiLineString(`
+class PetThief
+{
+public:
+    void release();
+
+protected:
+    void run();
+};
+            `);
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
+        });
+
+        it('should have public, protected, and private functions', () => {
+            let cppclass = new CPPClass('PetThief');
+            let shouldFxn = new CPPFunction('bool', 'shouldSteal');
+            let stealFxn = new CPPFunction('void', 'release');
+            let runFxn = new CPPFunction('void', 'run');
+
+            shouldFxn.setVirtual(false);
+            shouldFxn.setParentClass(cppclass, CPPVisibility.Private);
+
+            stealFxn.setVirtual(false);
+            stealFxn.setParentClass(cppclass, CPPVisibility.Public);
+
+            runFxn.setVirtual(false);
+            runFxn.setParentClass(cppclass, CPPVisibility.Protected);
+
+            let fmtr = new CPPFormatter({
+                indentWithSpaces: true,
+                indentSpaceCount: 4,
+                bracesOnNewLine: true
+            });
+            let expected = multiLineString(`
+class PetThief
+{
+public:
+    void release();
+
+protected:
+    void run();
+
+private:
+    bool shouldSteal();
 };
             `);
 
