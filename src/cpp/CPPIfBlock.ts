@@ -1,33 +1,32 @@
 import CPPCodeBlock from './CPPCodeBlock';
-import ILanguageCodeBlock from '../ILanguageCodeBlock';
-import ILanguageFormatter from '../ILanguageFormatter';
+import CPPFormatter from './CPPFormatter';
+import CPPWritable from './CPPWritable';
 import ILanguageIfBlock from '../ILanguageIfBlock';
-import ILanguageWritable from '../ILanguageWritable';
 
-export default class CPPIfBlock implements ILanguageIfBlock {
-    conditions: { [condition: string]: ILanguageWritable[] } = {};
-    elseCondition: ILanguageWritable[] = [];
+export default class CPPIfBlock implements CPPWritable, ILanguageIfBlock {
+    conditions: { [condition: string]: CPPWritable[] } = {};
+    elseCondition: CPPWritable[] = [];
 
     constructor() {}
 
-    defineCondition(condition: string, body: ILanguageWritable[]): this {
+    defineCondition(condition: string, body: CPPWritable[]): this {
         this.conditions[condition] = body;
 
         return this;
     }
 
-    defineElseCondition(body: ILanguageWritable[]): this {
+    defineElseCondition(body: CPPWritable[]): this {
         this.elseCondition = body;
 
         return this;
     }
 
-    write(formatter: ILanguageFormatter, indentCount: number = 0): string {
+    write(formatter: CPPFormatter, indentCount: number = 0): string {
         if (Object.keys(this.conditions).length == 0) {
             return '';
         }
 
-        let ifBlocks: ILanguageCodeBlock[] = [];
+        let ifBlocks: CPPCodeBlock[] = [];
         let first: boolean = true;
 
         for (let condition in this.conditions) {

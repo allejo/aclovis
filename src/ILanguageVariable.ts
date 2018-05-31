@@ -1,6 +1,4 @@
-import IWritable from './ILanguageWritable';
-
-export default interface ILanguageVariable extends IWritable {
+export default interface ILanguageVariable {
     getDataType(): string;
     setDataType(value: string): this;
 

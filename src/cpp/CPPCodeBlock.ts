@@ -1,8 +1,9 @@
-import CPPFormatter from './CPPFormatter';
 import ILanguageCodeBlock from '../ILanguageCodeBlock';
 import ILanguageWritable from '../ILanguageWritable';
+import CPPFormatter from './CPPFormatter';
+import CPPWritable from './CPPWritable';
 
-export default class CPPCodeBlock implements ILanguageCodeBlock {
+export default class CPPCodeBlock implements CPPWritable, ILanguageCodeBlock {
     private disableBraces: boolean = false;
     private suffix: string[] = [];
 

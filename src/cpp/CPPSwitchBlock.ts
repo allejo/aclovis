@@ -1,17 +1,18 @@
-import { ILanguageWritable, CPPIfBlock, CPPCodeBlock, CPPFormatter, CPPHelper } from '..';
+import { CPPIfBlock, CPPCodeBlock, CPPFormatter, CPPHelper } from '..';
+import CPPWritable from './CPPWritable';
 
 export default class CPPSwitchBlock extends CPPIfBlock {
     constructor(readonly condition: string) {
         super();
     }
 
-    defineCase(condition: string, body: ILanguageWritable[]): this {
+    defineCase(condition: string, body: CPPWritable[]): this {
         super.defineCondition(condition, body);
 
         return this;
     }
 
-    defineDefault(body: ILanguageWritable[]): this {
+    defineDefault(body: CPPWritable[]): this {
         super.defineElseCondition(body);
 
         return this;
@@ -20,7 +21,7 @@ export default class CPPSwitchBlock extends CPPIfBlock {
     write(formatter: CPPFormatter, indentCount: number): string {
         let parentSwitch = new CPPCodeBlock(`switch (${this.condition})`);
 
-        let cases: ILanguageWritable[] = [];
+        let cases: CPPWritable[] = [];
 
         for (let condition in this.conditions) {
             let caseBlock = new CPPCodeBlock(`case ${condition}:`, this.conditions[condition]);

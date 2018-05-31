@@ -1,6 +1,4 @@
-import IWritable from './ILanguageWritable';
-
-export default interface ILanguageClass extends IWritable {
+export default interface ILanguageClass {
     getClassName(): string;
 };
 

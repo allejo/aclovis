@@ -1,7 +1,8 @@
 import CPPFormatter from './CPPFormatter';
 import ILanguageComment from '../ILanguageComment';
+import CPPWritable from './CPPWritable';
 
-export default class CPPComment implements ILanguageComment {
+export default class CPPComment implements CPPWritable, ILanguageComment {
     private body: string[];
 
     constructor(body: string | string[], private blockType: boolean) {

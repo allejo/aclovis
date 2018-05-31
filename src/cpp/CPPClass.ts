@@ -1,11 +1,12 @@
+import ILanguageClass from '../ILanguageClass';
 import ILanguageWritable from '../ILanguageWritable';
 import CPPFormatter from './CPPFormatter';
 import CPPFunction from './CPPFunction';
 import CPPHelper from './CPPHelper';
 import CPPVariable from './CPPVariable';
 import CPPVisibility from './CPPVisibility';
-import ILanguageClass from '../ILanguageClass';
 import CPPCodeBlock from './CPPCodeBlock';
+import CPPWritable from './CPPWritable';
 import CPPWritableObject from './CPPWritableObject';
 
 export interface CPPFunctionDefinition {
@@ -27,7 +28,7 @@ export interface CPPVariableStorage {
     [name: string]: CPPVariableDefinition;
 }
 
-export default class CPPClass implements ILanguageClass {
+export default class CPPClass implements CPPWritable, ILanguageClass {
     private classIncludes: string[] = [];
     private classExtends: [string, CPPClass | string][] = [];
     private methods: CPPFunctionStorage = {};

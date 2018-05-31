@@ -3,10 +3,11 @@ import CPPCodeBlock from './CPPCodeBlock';
 import CPPFormatter from './CPPFormatter';
 import CPPVariable from './CPPVariable';
 import CPPVisibility from './CPPVisibility';
+import CPPWritable from './CPPWritable';
 import ILanguageFunction from '../ILanguageFunction';
 import ILanguageWritable from '../ILanguageWritable';
 
-export default class CPPFunction implements ILanguageFunction {
+export default class CPPFunction implements CPPWritable, ILanguageFunction {
     private parentClass?: CPPClass;
     private body: ILanguageWritable[] = [];
     private virtual: boolean = false;

@@ -1,8 +1,9 @@
 import CPPFormatter from './CPPFormatter';
+import CPPWritable from './CPPWritable';
 import CPPWritableObject from './CPPWritableObject';
 import ILanguageVariable from '../ILanguageVariable';
 
-export default class CPPVariable implements ILanguageVariable {
+export default class CPPVariable implements CPPWritable, ILanguageVariable {
     constructor(private dataType: string, private variableName: string, private variableValue?: any) {}
 
     getDataType(): string {
