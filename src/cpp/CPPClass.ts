@@ -1,5 +1,4 @@
 import ILanguageClass from '../ILanguageClass';
-import ILanguageWritable from '../ILanguageWritable';
 import CPPFormatter from './CPPFormatter';
 import CPPFunction from './CPPFunction';
 import CPPHelper from './CPPHelper';
@@ -29,6 +28,8 @@ export interface CPPVariableStorage {
 }
 
 export default class CPPClass implements CPPWritable, ILanguageClass {
+    private constructorBody: CPPWritable[] = [];
+    private constructorInitializerList: string[] = [];
     private classIncludes: string[] = [];
     private classExtends: [string, CPPClass | string][] = [];
     private methods: CPPFunctionStorage = {};
@@ -47,6 +48,11 @@ export default class CPPClass implements CPPWritable, ILanguageClass {
 
     getClassName(): string {
         return this.name;
+    }
+
+    setConstructor(body: CPPWritable[], initializerList: string[]): void {
+        this.constructorBody = body;
+        this.constructorInitializerList = initializerList;
     }
 
     getMethods(): CPPFunctionStorage {
@@ -165,17 +171,33 @@ export default class CPPClass implements CPPWritable, ILanguageClass {
     }
 
     writeHeaderBlock(formatter: CPPFormatter, indentCount: number): string {
-        let definitionBodies: { [key: string]: CPPWritableObject[] } = {
+        let definitionBodies: { [key: string]: CPPWritable[] } = {
             [CPPVisibility.Public]: [],
             [CPPVisibility.Protected]: [],
             [CPPVisibility.Private]: []
         };
-        let instanceVariables: { [key: string]: ILanguageWritable[] } = {
+        let instanceVariables: { [key: string]: CPPWritable[] } = {
             [CPPVisibility.Public]: [],
             [CPPVisibility.Protected]: [],
             [CPPVisibility.Private]: []
         };
-        let classDefinitionBody: ILanguageWritable[] = [];
+        let classDefinitionBody: CPPWritable[] = [];
+
+        let hasInitializerList = this.constructorInitializerList.length > 0;
+        let hasConstructorBody = this.constructorBody.length > 0;
+
+        if (hasConstructorBody || hasInitializerList) {
+            let constructorSig = `${this.getClassName()}()`;
+            let initList = this.constructorInitializerList.join(`,\n${formatter.indentation.repeat(2)}`);
+
+            if (hasInitializerList) {
+                constructorSig = `${constructorSig} : ${initList}`;
+            }
+
+            let constructor = new CPPCodeBlock(constructorSig, this.constructorBody);
+
+            definitionBodies[CPPVisibility.Public].push(constructor);
+        }
 
         for (let key in this.methods) {
             let output = '';

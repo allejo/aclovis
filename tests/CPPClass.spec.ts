@@ -1,4 +1,5 @@
 import CPPClass from '../src/cpp/CPPClass';
+import CPPComment from '../src/cpp/CPPComment';
 import CPPFormatter from '../src/cpp/CPPFormatter';
 import CPPFunction from '../src/cpp/CPPFunction';
 import CPPVariable from '../src/cpp/CPPVariable';
@@ -313,6 +314,146 @@ protected:
 
 private:
     bool shouldSteal();
+};
+            `);
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
+        });
+
+        it('should have a constructor with a comment', () => {
+            let cppclass = new CPPClass('PetThief');
+            let fmtr = new CPPFormatter({
+                indentWithSpaces: true,
+                indentSpaceCount: 4,
+                bracesOnNewLine: true
+            });
+
+            cppclass.setConstructor([new CPPComment('Hello world', false)], []);
+
+            let expected = multiLineString(`
+class PetThief
+{
+public:
+    PetThief()
+    {
+        // Hello world
+    }
+};
+            `);
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
+        });
+
+        it('should have a constructor with an initializer list', () => {
+            let cppclass = new CPPClass('PetThief');
+            let fmtr = new CPPFormatter({
+                indentWithSpaces: true,
+                indentSpaceCount: 4,
+                bracesOnNewLine: true
+            });
+
+            cppclass.setConstructor([
+                new CPPComment('Hello world', false)
+            ], [
+                'superClass()',
+                'roar(i)'
+            ]);
+
+            let expected = multiLineString(`
+class PetThief
+{
+public:
+    PetThief() : superClass(),
+        roar(i)
+    {
+        // Hello world
+    }
+};
+            `);
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
+        });
+
+        it('should have a constructor with an initializer list of multiple attributes', () => {
+            let cppclass = new CPPClass('PetThief');
+            let fmtr = new CPPFormatter({
+                indentWithSpaces: true,
+                indentSpaceCount: 4,
+                bracesOnNewLine: true
+            });
+
+            cppclass.setConstructor([
+                new CPPComment('Hello world', false)
+            ], [
+                'superClass()',
+                'roar(i)',
+                'toast(false)',
+                'something("hello")'
+            ]);
+
+            let expected = multiLineString(`
+class PetThief
+{
+public:
+    PetThief() : superClass(),
+        roar(i),
+        toast(false),
+        something("hello")
+    {
+        // Hello world
+    }
+};
+            `);
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
+        });
+
+        it('should have a constructor with an initializer list and no body', () => {
+            let cppclass = new CPPClass('PetThief');
+            let fmtr = new CPPFormatter({
+                indentWithSpaces: true,
+                indentSpaceCount: 4,
+                bracesOnNewLine: true
+            });
+
+            cppclass.setConstructor([], [
+                'superClass()',
+                'roar(i)',
+            ]);
+
+            let expected = multiLineString(`
+class PetThief
+{
+public:
+    PetThief() : superClass(),
+        roar(i)
+    {
+    }
+};
+            `);
+
+            expect(cppclass.writeHeaderBlock(fmtr, 0)).to.equal(expected);
+        });
+
+        it('should have a constructor with a single initializer item and no body', () => {
+            let cppclass = new CPPClass('PetThief');
+            let fmtr = new CPPFormatter({
+                indentWithSpaces: true,
+                indentSpaceCount: 4,
+                bracesOnNewLine: true
+            });
+
+            cppclass.setConstructor([], [
+                'superClass()'
+            ]);
+
+            let expected = multiLineString(`
+class PetThief
+{
+public:
+    PetThief() : superClass()
+    {
+    }
 };
             `);
 
