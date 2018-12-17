@@ -8,6 +8,7 @@ import CPPIfBlock from './cpp/CPPIfBlock';
 import CPPSwitchBlock from './cpp/CPPSwitchBlock';
 import CPPVariable from './cpp/CPPVariable';
 import CPPVisibility from './cpp/CPPVisibility';
+import CPPWritable from './cpp/CPPWritable';
 import CPPWritableObject from './cpp/CPPWritableObject';
 
 import IFormatOptions from './IFormatOptions';
@@ -31,6 +32,7 @@ export {
     CPPSwitchBlock,
     CPPVariable,
     CPPVisibility,
+    CPPWritable,
     CPPWritableObject,
     IFormatOptions,
     ILanguageClass,
