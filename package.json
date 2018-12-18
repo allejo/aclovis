@@ -1,6 +1,6 @@
 {
   "name": "aclovis",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A library to generate C++ code in TypeScript",
   "private": false,
   "main": "dist/index.js",
