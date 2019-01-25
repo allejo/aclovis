@@ -50,8 +50,9 @@ export default class CPPVariable implements CPPWritable, ILanguageVariable {
         return this.createVariable('bool', name, value, value ? 'true' : 'false');
     }
 
-    static createInt(name: string, value?: number | CPPVariable | CPPWritableObject): CPPVariable {
-        return this.createVariable('int', name, value);
+    static createInt(name: string, value?: number | CPPVariable | CPPWritableObject, unsigned: boolean = false): CPPVariable {
+        const dataType: string = unsigned ? 'unsigned int' : 'int';
+        return this.createVariable(dataType, name, value);
     }
 
     static createDouble(name: string, value?: number | CPPVariable | CPPWritableObject): CPPVariable {

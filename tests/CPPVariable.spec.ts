@@ -77,6 +77,12 @@ describe('C++ Variables', () => {
 
                 expect(cppvar.write(fmtr)).to.equal('int myInt = 100;');
             });
+
+            it('should declare and initialize an unsigned integer value', () => {
+                const cppvar = CPPVariable.createInt('myInt', 100, true);
+
+                expect(cppvar.write(fmtr)).to.equal('unsigned int myInt = 100;');
+            });
         });
 
         describe('Double functions', () => {
