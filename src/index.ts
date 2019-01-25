@@ -1,6 +1,7 @@
 import CPPClass from './cpp/CPPClass';
 import CPPCodeBlock from './cpp/CPPCodeBlock';
 import CPPComment from './cpp/CPPComment';
+import CPPForLoop from './cpp/CPPForLoop';
 import CPPFormatter from './cpp/CPPFormatter';
 import CPPFunction from './cpp/CPPFunction';
 import CPPHelper from './cpp/CPPHelper';
@@ -25,6 +26,7 @@ export {
     CPPClass,
     CPPCodeBlock,
     CPPComment,
+    CPPForLoop,
     CPPFormatter,
     CPPFunction,
     CPPHelper,
